@@ -152,12 +152,11 @@ export default {
             </table>
             _________________________________________________\
             <div style="width: 50%; float: right;">
-                <span style="float: left;">Subtotal:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.subtotal) + `</span>\
+                <span style="float: left;">Non-Vat:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.subtotal-this.tax) + `</span>\
                 <br/>\
+                <span style="float: left;">Vat:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.tax) + `</span>\
                 <br/>\
                 <span style="float: left;">Discount:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.discounted) + `</span>\
-                <br/>\
-                <span style="float: left;">Tax:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.tax) + `</span>\
                 <br/>\
                 <span style="float: left; font-weight: bold;">Total:</span> <span style="float: right; font-weight: bold; margin-right: 0;">` + this.formatMoney(this.total) + `</span>\
                 <br/>\
@@ -171,6 +170,7 @@ export default {
                 <br/>\
                 <span style="float: left;">Contact</span> <span style="float: right; margin-right: 0;">` + this.customer.contact + `</span>\
             </div>
+             _________________________________________________\
             `);
 
             printWindow.document.write('</body></html>');
