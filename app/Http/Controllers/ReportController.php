@@ -27,7 +27,7 @@ class ReportController extends Controller
                     $monday =  date("Y-m-d", strtotime($monday));
                     $sunday = date("Y-m-d", strtotime($sunday));    
 
-                    $sales = SaleList::with('product','sale.customer')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
+                    $sales = SaleList::with('product','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
                     
                     $lists = [];
                     if(count($sales) > 0){
@@ -37,7 +37,9 @@ class ReportController extends Controller
                                 'type' => 'Sold',
                                 'quantity' => $sale['quantity'],
                                 'price'=> $sale['price'],
+                                'total'=> $sale['total'],
                                 'customer' => $sale['sale']['customer']['name'],
+                                'cashier' => $sale['sale']['user']['name'],
                                 'date' => $sale['created_at']
                             ];
                         }
@@ -64,9 +66,9 @@ class ReportController extends Controller
                         foreach($orders as $order){
                             $lists[] = [
                                 'product' => $order['product']['name'],
-                                'type' => 'Restock',
                                 'quantity' => $order['quantity'],
                                 'price'=> $order['price'],
+                                'total'=> $order['order']['total'],
                                 'date' => $order['created_at'],
                                 'supplier' => $order['order']['supplier']['supplier']['name'].' - '.$order['order']['supplier']['name'],
                             ];
@@ -79,6 +81,7 @@ class ReportController extends Controller
             break;
             case 'inventory':
                 $subtype = $request->subtype;
+                $sort = $request->sort;
                 if($subtype == 'lists'){
                     $date = $request->date;
                     $d = (explode("to", $date));
@@ -87,33 +90,21 @@ class ReportController extends Controller
                     $monday =  date("Y-m-d", strtotime($monday));
                     $sunday = date("Y-m-d", strtotime($sunday));    
 
-                    $sales = SaleList::with('product')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
-                    $orders = OrderList::with('product')->whereBetween('created_at', [$monday, $sunday])->where('status_id',8)->get();
+                    $products = Product::whereBetween($sort, [$monday, $sunday])->get();
                     
                     $lists = [];
-                    if(count($sales) > 0){
-                        foreach($sales as $sale){
+                    if(count($products) > 0){
+                        foreach($products as $product){
                             $lists[] = [
-                                'product' => $sale['product']['name'],
-                                'type' => 'Sold',
-                                'quantity' => $sale['quantity'],
-                                'price'=> $sale['price'],
-                                'date' => $sale['created_at']
+                                'name' => $product['name'],
+                                'code' => $product['code'],
+                                'price' => $product['price'],
+                                'stock' => $product['stock'],
+                                'created_at' => $product['created_at'],
+                                'updated_at' => $product['updated_at'],
                             ];
                         }
                     }
-                    if(count($orders) > 0){
-                        foreach($orders as $order){
-                            $lists[] = [
-                                'product' => $order['product']['name'],
-                                'type' => 'Restock',
-                                'quantity' => $order['quantity'],
-                                'price'=> $order['price'],
-                                'date' => $order['created_at']
-                            ];
-                        }
-                    }
-
                     return $lists;
                 }else{
                     return inertia('Modules/Reports/Inventory',['d' => $monday.' to '.$sunday]);
@@ -129,7 +120,7 @@ class ReportController extends Controller
                     $monday =  date("Y-m-d", strtotime($monday));
                     $sunday = date("Y-m-d", strtotime($sunday));    
 
-                    $lists = ProductAdjustment::with('product')->whereBetween('created_at', [$monday, $sunday])->get();
+                    $lists = ProductAdjustment::with('product','user')->whereBetween('created_at', [$monday, $sunday])->get();
                     return $lists;
                 }else{
                     return inertia('Modules/Reports/Adjustment',['d' => $monday.' to '.$sunday]);
@@ -239,7 +230,7 @@ class ReportController extends Controller
         $monday =  date("Y-m-d", strtotime($monday));
         $sunday = date("Y-m-d", strtotime($sunday));        
 
-        $sales = SaleList::with('product','sale.customer')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
+        $sales = SaleList::with('product','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
         
         $sessions = [];
         if(count($sales) > 0){
@@ -250,9 +241,13 @@ class ReportController extends Controller
                     'type' => 'Sold',
                     'quantity' => $sale['quantity'],
                     'price'=> $sale['price'],
+                    'total'=> $sale['total'],
+                    'cashier'=> $sale['sale']['user']['name'],
                     'date' => $sale['created_at']
                 ];
             }
+        }else{
+            $sessions = [];
         }
 
         $monday2 =  date("F d, y", strtotime("this week monday"));
@@ -285,9 +280,12 @@ class ReportController extends Controller
                     'type' => 'Restock',
                     'quantity' => $order['quantity'],
                     'price'=> $order['price'],
+                    'total'=> $order['order']['total'],
                     'date' => $order['created_at']
                 ];
             }
+        }else{
+            $sessions = [];
         }
 
         $monday2 =  date("F d, y", strtotime("this week monday"));
@@ -321,6 +319,8 @@ class ReportController extends Controller
                     'date' => $list['created_at']
                 ];
             }
+        }else{
+            $sessions = [];
         }
 
         $monday2 =  date("F d, y", strtotime("this week monday"));
@@ -356,6 +356,8 @@ class ReportController extends Controller
                     'date' => $list['created_at']
                 ];
             }
+        }else{
+            $sessions = [];
         }
 
         $monday2 =  date("F d, y", strtotime("this week monday"));
@@ -391,6 +393,8 @@ class ReportController extends Controller
                     'date' => $list['created_at']
                 ];
             }
+        }else{
+            $sessions = [];
         }
 
         $monday2 =  date("F d, y", strtotime("this week monday"));

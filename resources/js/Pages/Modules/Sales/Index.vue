@@ -114,45 +114,62 @@
                     <h5 class="card-title mb-0">Order Summary</h5>
                 </div>
                 <div class="card-header bg-light-subtle border-bottom-dashed">
-                    <div class="col-md-12 ">
-                        <multiselect v-model="customer" id="ajax" label="name" track-by="id"
-                            placeholder="Select Customer" open-direction="bottom" :options="customers"
-                            :allow-empty="false"
-                            :show-labels="false">
-                        </multiselect> 
-                    </div>
-                    <div class="col-md-12 mt-2">
-                        <multiselect v-model="discount" id="ajax" label="name" track-by="id"
-                            placeholder="Select Discount" open-direction="bottom" :options="discount_lists"
-                            :allow-empty="false"
-                            :show-labels="false">
-                        </multiselect> 
-                    </div>
-                    <div class="col-md-12 mt-2">
-                        <multiselect v-model="payment" id="ajax" label="name" track-by="id"
-                            placeholder="Select Payment" open-direction="bottom" :options="payments"
-                            :allow-empty="false"
-                            :show-labels="false">
-                        </multiselect> 
+                    <div class="row g-2">
+                        <div class="col-md-12 ">
+                            <multiselect v-model="customer" id="ajax" label="name" track-by="id"
+                                placeholder="Select Customer" open-direction="bottom" :options="customers"
+                                :allow-empty="false"
+                                :show-labels="false">
+                            </multiselect> 
+                        </div>
+                        <div class="col-md-12 mt-2">
+                            <multiselect v-model="discount" id="ajax" label="name" track-by="id"
+                                placeholder="Select Discount" open-direction="bottom" :options="discount_lists"
+                                :allow-empty="false"
+                                :show-labels="false">
+                            </multiselect> 
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <multiselect v-model="payment" id="ajax" label="name" track-by="id"
+                                placeholder="Select Payment" open-direction="bottom" :options="payments"
+                                :allow-empty="false"
+                                :show-labels="false">
+                            </multiselect> 
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <div class="form-group">
+                                <input type="text" class="form-control" v-model="cash" placeholder="Enter Cash Amount">
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+               
              
                 <div class="card-body" style="height: calc(100vh - 404px); overflow: auto;">
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Sub Total :</td>
-                                    <td class="text-end" id="cart-subtotal">{{formatMoney(subtotal)}}</td>
+                                    <td>Change :</td>
+                                    <td class="text-end" id="cart-subtotal">{{formatMoney(change)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Non-vat:</td>
+                                    <td class="text-end" id="cart-subtotal">{{formatMoney(subtotal - tax)}}</td>
+                                </tr>
+                                  <tr>
+                                    <td>Vat:</td>
+                                    <td class="text-end" id="cart-subtotal">{{formatMoney(tax)}}</td>
                                 </tr>
                                 <tr>
                                     <td>Discount : </td>
                                     <td class="text-end" id="cart-discount">{{formatMoney(discounted)}}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>Estimated Tax (12%) : </td>
                                     <td class="text-end" id="cart-tax">{{formatMoney(tax)}}</td>
-                                </tr>
+                                </tr> -->
                                 <tr class="table-active">
                                     <th class="fs-14">Total :</th>
                                     <td class="text-end fs-14">
@@ -198,6 +215,7 @@ export default {
             lists: [],
             meta: {},
             links: {},
+            cash: ''
         };
     },
     created(){
@@ -223,7 +241,8 @@ export default {
             return this.subtotal * 0.12;
         },
         total() {
-            return this.subtotal + this.tax - this.discounted;
+            // return this.subtotal + this.tax - this.discounted;
+            return (this.subtotal-this.tax) + this.tax - this.discounted;
         },
         payments : function() {
             let p =  this.dropdowns.filter(x => x.classification == 'Payment');
@@ -233,11 +252,18 @@ export default {
         discount_lists(){
             // return this.discounts.filter(x => x.based_id == 12).filter(x => x.type_id == 15);
             return this.discounts.filter(x => x.is_active == 1);
+        },
+        change(){
+            if(this.cash > this.total){
+                return this.cash - this.total;
+            }else{
+                return 0;
+            }
         }
     },
     methods: {
         create(){
-            this.$refs.confirm.set(this.items,this.customer,this.payment,this.discount,this.subtotal,this.discounted,this.tax,this.total);
+            this.$refs.confirm.set(this.items,this.customer,this.payment,this.discount,this.subtotal,this.discounted,this.tax,this.total,this.cash,this.change);
         },
         checkSearchStr: _.debounce(function(string) {
             this.fetch();

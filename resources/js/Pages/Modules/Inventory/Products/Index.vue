@@ -61,7 +61,7 @@
                             <td class="text-center">
                                 <!-- <b-button @click="openView(list)" variant="soft-primary" v-b-tooltip.hover title="View Product" size="sm" class="edit-list me-1 w-xs">View</b-button> -->
                                 <!-- <b-button @click="edit(list)" variant="soft-primary" v-b-tooltip.hover title="Edit Product" size="sm" class="edit-list me-1 w-xs">Edit</b-button> -->
-                                <b-button @click="openPrice(list)" variant="dark" v-b-tooltip.hover title="Update Price" size="sm" class="edit-list me-1"><i class="ri-hand-coin-line"></i></b-button>
+                                <!-- <b-button @click="openPrice(list)" variant="dark" v-b-tooltip.hover title="Update Price" size="sm" class="edit-list me-1"><i class="ri-hand-coin-line"></i></b-button> -->
                                 <b-button @click="openStock(list)" variant="success" v-b-tooltip.hover title="Stock Adjustment" size="sm" class="edit-list me-1"><i class="ri-shopping-cart-2-fill"></i></b-button>
                                 <b-button @click="openStatus(list)" variant="danger" v-b-tooltip.hover title="Update Status" size="sm" class="edit-list me-1"><i class="bx bxs-hand"></i></b-button>
                                 <b-button @click="openOrder(list)" variant="info" v-b-tooltip.hover title="View Orders" size="sm" class="edit-list me-1"><i class="ri-eye-fill"></i></b-button>

@@ -21,6 +21,7 @@ class ItemResource extends JsonResource
             'category' => $this->category,
             'unit' => $this->unit,
             'pricing' => $this->pricing,
+            'percentage' => $this->percentage,
             'created_at' => $this->created_at,
             'total' => $this->total(),
             'quantities' => $this->quantities(),

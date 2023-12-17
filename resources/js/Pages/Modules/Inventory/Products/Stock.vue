@@ -5,7 +5,7 @@
                 <div class="col-md-12 mt-4">
                    <div class="form-group">
                         <label>Quantity: <span v-if="form.errors" v-text="form.errors.quantity" class="haveerror"></span></label>
-                        <input type="number" class="form-control" v-model="quantity">
+                        <input type="number"  v-maska data-maska="#" class="form-control" min="1" v-model="quantity">
                     </div>
                 </div> 
                 <div class="col-md-12 mt-3">
@@ -23,17 +23,20 @@
 </template>
 
 <script>
+import { vMaska } from "maska"
 export default {
+        directives: { maska: vMaska },
     data() {
         return {
             currentUrl: window.location.origin,
             showModal: false,
             id: '',
-            quantity: '',
+            quantity: 1,
             reason: '',
             form: {}
         }
     },
+
     methods: {
         set(data){
             this.id = data.id;
@@ -54,7 +57,7 @@ export default {
                     this.showModal = false;
                 }
             });
-        }
+        },
     }
 }
 </script>

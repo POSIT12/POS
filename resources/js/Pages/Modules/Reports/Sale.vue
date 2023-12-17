@@ -8,7 +8,7 @@
                         <b-col sm="auto">
                             <div class="input-group">
                                 <flat-pickr v-model="date" :config="config" class="form-control border-0 dash-filter-picker shadow"></flat-pickr>
-                                <div style="cursor: pointer;" @click="fetchMine()" class="input-group-text bg-primary border-primary text-white">
+                                <div style="cursor: pointer;" @click="fetch()" class="input-group-text bg-primary border-primary text-white">
                                     <i class="ri-calendar-2-line"></i>
                                 </div>
                             </div>
@@ -21,6 +21,22 @@
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="p-2 mt-n4 mb-3 border border-dashed rounded">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-sm me-2" style="cursor: pointer;">
+                                <div class="avatar-title rounded bg-transparent text-primary fs-24"><i class="ri-hand-coin-fill "></i></div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="text-muted fs-11 mb-0">Total Sales :</p>
+                                <h5 class="fs-16 text-success mb-0">{{calculateTotal()}}</h5>
+                            </div>
+                            <!-- <div class="text-end">
+                                <button class="btn btn-light btn-md btn-label waves-effect waves-light" type="button">
+                                    <div class="btn-content"><i class="bx bxs-webcam label-icon align-middle fs-16 me-2"></i> test</div>
+                                </button>
+                            </div> -->
+                        </div>
+                    </div>
                     <div class="table-responsive mt-1" v-if="lists.length > 0">
                         <table class="table table-bordered table-centered align-middle table-nowrap mb-0">
                             <thead class="text-muted table-light">
@@ -28,8 +44,10 @@
                                     <th scope="col" class="text-center">Customer</th>
                                     <th scope="col" class="text-center">Type</th>
                                     <th scope="col" class="text-center">Product</th>
-                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-center">Qnty</th>
                                     <th scope="col" class="text-center">Price</th>
+                                    <th scope="col" class="text-center">Total</th>
+                                    <th scope="col" class="text-center">Cashier</th>
                                     <th scope="col" class="text-center">Date</th>
                                 </tr>
                             </thead>
@@ -40,6 +58,8 @@
                                     <td class="text-center">{{list.product}}</td>
                                     <td class="text-center">{{list.quantity}}</td>
                                     <td class="text-center">{{formatMoney(list.price)}}</td>
+                                    <td class="text-center">{{formatMoney(list.total)}}</td>
+                                    <td class="text-center">{{list.cashier}}</td>
                                     <td class="text-center">{{list.date}}</td>
                                 </tr>
                             </tbody>
@@ -93,7 +113,10 @@ export default {
         },
         print(){
             window.open(this.currentUrl + '/reports/'+this.date+'/sales');
-        }
+        },
+        calculateTotal() {
+            return this.formatMoney(this.lists.reduce((total, item) => total + parseInt(item.total), 0));
+        },
     }
 }
 </script>

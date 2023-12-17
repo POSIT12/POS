@@ -48,7 +48,7 @@ class SaleController extends Controller
                 $total = 0;
                 $code = 'SLS'.date('Y').date('m').date('d')."-".str_pad((Sale::count()+1), 4, '0', STR_PAD_LEFT);  
                 $lists = $request->lists;
-                $data = Sale::create(array_merge($request->all(),['code' => $code]));
+                $data = Sale::create(array_merge($request->all(),['code' => $code, 'managed_by' => \Auth::user()->id]));
                 if($data){
                     foreach($lists as $list){
                         $l = new SaleList;

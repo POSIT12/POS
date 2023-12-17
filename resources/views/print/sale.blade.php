@@ -85,35 +85,43 @@ border-top: none !important;
         $week = json_encode($week); 
         $week = json_decode($week, true); 
     ?>
-
+    <img src="{{ asset('images/logo.png') }}" style="position: absolute; top: -5; left: 250; width: 60px; height: 60px;">
     <div style="font-family:Calibri;">
-        <center style="font-size: 13px; margin-bottom: 3px;"">POST INVENTORY SYSTEM</center>
+        <center style="font-size: 13px; margin-bottom: 3px;"">POS INVENTORY SYSTEM</center>
         <center style="font-size: 8px; margin-bottom: 10px; font-family:Arial, Helvetica, sans-serif;">SALES REPORT</center>
         <center style="font-size: 10px; font-weight: bold; margin-bottom: 10px; font-family:Arial, Helvetica, sans-serif;">{{strtoupper($week)}}</center>
 
         <table style="width:100%; font-size: 10px; padding: 20px; font-family:Arial, Helvetica, sans-serif">
             <thead>
                 <tr style="background-color: #a7dceb;">
-                    <th>Customer</th>
-                    <th>Type</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Date</th>
+                    <th scope="col" class="text-center">Customer</th>
+                    <th scope="col" class="text-center">Product</th>
+                    <th scope="col" class="text-center">Qnty</th>
+                    <th scope="col" class="text-center">Price</th>
+                    <th scope="col" class="text-center">Total</th>
+                    <th scope="col" class="text-center">Cashier</th>
+                    <th scope="col" class="text-center">Date</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($sessions as $key=>$session)
                 <tr>
                     <td><center>{{$session['customer']}}</center></td>
-                    <td><center>{{$session['type']}}</center></td>
                     <td class="nor"><center>{{$session['product']}}</center></td>
                     <td class="nor"><center>{{$session['quantity']}}</center></td>
                     <td class="nor"><center>{{$session['price']}}</center></td>
+                    <td class="nor"><center>{{$session['total']}}</center></td>
+                    <td class="nor"><center>{{$session['cashier']}}</center></td>
                     <td class="nor"><center>{{$session['date']}}</center></td>
                 </tr>
                 @endforeach
             </tbody>
+        </table>
+        <table style="font-size: 10px; font-family:Arial, Helvetica, sans-serif; width: 100%; border:none;  left: 0; bottom: 0; position:absolute; margin-left: auto; margin-right: auto;">
+            <tr>
+                <td style="width: 50%; text-align: left; font-style: bold; border-left: none; border-right: none; padding: 5px;">Printed By: {{ auth()->user()->name }}</td>
+                <td style="width: 50%; text-align: right; font-style: bold; border-left: none; border-right: none; padding: 5px;">Date: {{ now()}}</td>
+            </tr>
         </table>
     </div>
 </body>

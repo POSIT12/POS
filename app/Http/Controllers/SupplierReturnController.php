@@ -69,7 +69,7 @@ class SupplierReturnController extends Controller
             SaleList::with('product','sale.customer','status','return.status')
             ->where('status_id',28)
             ->whereHas('return',function ($query) {
-                $query->where('reason_id','!=',36);
+                $query->where('reason_id',33);
             })
             ->orderBy('id','desc')
             ->paginate(10)

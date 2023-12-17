@@ -28,6 +28,11 @@ class Product extends Model
         return $this->belongsTo('App\Models\Dropdown', 'pricing_id', 'id');
     } 
 
+    public function percentage()
+    {
+        return $this->belongsTo('App\Models\Pricing', 'percentage_id', 'id');
+    } 
+
     public function orders()
     {
         return $this->hasMany('App\Models\OrderList', 'product_id')->orderBy('created_at','DESC');

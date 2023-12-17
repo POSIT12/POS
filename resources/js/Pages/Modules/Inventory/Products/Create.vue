@@ -146,6 +146,7 @@ export default {
             this.product = data;
             this.product.pricing = data.pricing.id;
             this.product.unit = data.unit.id;
+            this.product.percentage = data.percentage.id;
             this.editable = true;
             this.showModal = true;
         },

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->bigInteger('managed_by')->unsigned()->index();
+            $table->foreign('managed_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

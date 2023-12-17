@@ -7,8 +7,12 @@
                     <div class="hstack gap-1">
                         <b-col sm="auto">
                             <div class="input-group">
+                                <select v-model="sort" @change="fetch()" class="form-select" id="inputGroupSelect02">
+                                    <option value="created_at" selected>Created At</option>
+                                    <option value="updated_at" selected>Updated At</option>
+                                </select>
                                 <flat-pickr v-model="date" :config="config" class="form-control border-0 dash-filter-picker shadow"></flat-pickr>
-                                <div style="cursor: pointer;" @click="fetchMine()" class="input-group-text bg-primary border-primary text-white">
+                                <div style="cursor: pointer;" @click="fetch()" class="input-group-text bg-primary border-primary text-white">
                                     <i class="ri-calendar-2-line"></i>
                                 </div>
                             </div>
@@ -25,20 +29,22 @@
                         <table class="table table-bordered table-centered align-middle table-nowrap mb-0">
                             <thead class="text-muted table-light">
                                 <tr>
-                                    <th scope="col" class="text-center">Type</th>
-                                    <th scope="col" class="text-center">Product</th>
-                                    <th scope="col" class="text-center">Quantity</th>
+                                    <th scope="col" class="text-center">Code</th>
+                                    <th scope="col" class="text-center">Name</th>
                                     <th scope="col" class="text-center">Price</th>
-                                    <th scope="col" class="text-center">Date</th>
+                                    <th scope="col" class="text-center">Stock</th>
+                                    <th scope="col" class="text-center">Created At</th>
+                                    <th scope="col" class="text-center">Updated At</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(list,index) in lists" v-bind:key="index">
-                                    <td class="text-center">{{list.type}}</td>
-                                    <td class="text-center">{{list.product}}</td>
-                                    <td class="text-center">{{list.quantity}}</td>
+                                    <td class="text-center">{{list.code}}</td>
+                                    <td class="text-center">{{list.name}}</td>
                                     <td class="text-center">{{formatMoney(list.price)}}</td>
-                                    <td class="text-center">{{list.date}}</td>
+                                    <td class="text-center">{{list.stock}}</td>
+                                    <td class="text-center">{{list.created_at}}</td>
+                                    <td class="text-center">{{list.updated_at}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -64,6 +70,7 @@ export default {
             config: {
                 mode: "range",
             },
+            sort: 'created_at'
         }
     },
     created(){
@@ -75,7 +82,8 @@ export default {
             axios.get(page_url,{
                 params : {
                     date : this.date,
-                    subtype: 'lists'
+                    subtype: 'lists',
+                    sort: (this.sort == 'Created At') ? 'created_at' : 'updated_at'
                 }
             })
             .then(response => {

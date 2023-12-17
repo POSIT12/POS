@@ -85,7 +85,7 @@ border-top: none !important;
         $week = json_encode($week); 
         $week = json_decode($week, true); 
     ?>
-
+    <img src="{{ asset('images/logo.png') }}" style="position: absolute; top: -5; left: 250; width: 60px; height: 60px;">
     <div style="font-family:Calibri;">
         <center style="font-size: 13px; margin-bottom: 3px;"">POST INVENTORY SYSTEM</center>
         <center style="font-size: 8px; margin-bottom: 10px; font-family:Arial, Helvetica, sans-serif;">DELIVERY REPORT</center>
@@ -95,10 +95,10 @@ border-top: none !important;
             <thead>
                 <tr style="background-color: #a7dceb;">
                     <th>Supplier</th>
-                    <th>Type</th>
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
+                    <th>Total</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -106,14 +106,20 @@ border-top: none !important;
                 @foreach($sessions as $key=>$session)
                 <tr>
                     <td><center>{{$session['supplier']}}</center></td>
-                    <td><center>{{$session['type']}}</center></td>
                     <td class="nor"><center>{{$session['product']}}</center></td>
                     <td class="nor"><center>{{$session['quantity']}}</center></td>
                     <td class="nor"><center>{{$session['price']}}</center></td>
+                    <td class="nor"><center>{{$session['total']}}</center></td>
                     <td class="nor"><center>{{$session['date']}}</center></td>
                 </tr>
                 @endforeach
             </tbody>
+        </table>
+        <table style="font-size: 10px; font-family:Arial, Helvetica, sans-serif; width: 100%; border:none;  left: 0; bottom: 0; position:absolute; margin-left: auto; margin-right: auto;">
+            <tr>
+                <td style="width: 50%; text-align: left; font-style: bold; border-left: none; border-right: none; padding: 5px;">Printed By: {{ auth()->user()->name }}</td>
+                <td style="width: 50%; text-align: right; font-style: bold; border-left: none; border-right: none; padding: 5px;">Date: {{ now()}}</td>
+            </tr>
         </table>
     </div>
 </body>

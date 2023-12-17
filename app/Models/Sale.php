@@ -10,7 +10,7 @@ class Sale extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code','subtotal','tax','discount','total','status_id','payment_id','customer_id','discount_id'
+        'code','subtotal','tax','discount','total','cash','change','status_id','payment_id','customer_id','discount_id','managed_by'
     ];
 
     public function lists()
@@ -36,6 +36,11 @@ class Sale extends Model
     public function customer()
     {
         return $this->belongsTo('App\Models\Customer', 'customer_id', 'id');
+    } 
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'managed_by', 'id');
     } 
 
     public function getUpdatedAtAttribute($value)

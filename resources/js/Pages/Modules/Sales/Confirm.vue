@@ -10,16 +10,24 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td width="50%"  class="text-center">Subtotal</td>
-                            <td width="50%" class="text-center"> {{formatMoney(subtotal)}}</td>
+                            <td width="50%"  class="text-center">Non-Vat</td>
+                            <td width="50%" class="text-center"> {{formatMoney(subtotal-tax)}}</td>
                         </tr>
                         <tr>
                             <td width="50%"  class="text-center">Discount</td>
                             <td width="50%" class="text-center"> {{formatMoney(discounted)}}</td>
                         </tr>
                         <tr>
-                            <td width="50%"  class="text-center">Tax</td>
+                            <td width="50%"  class="text-center">Vat</td>
                             <td width="50%" class="text-center"> {{formatMoney(tax)}}</td>
+                        </tr>
+                         <tr class="text-muted">
+                            <td width="50%"  class="text-center">Cash</td>
+                            <td width="50%" class="text-center"> {{formatMoney(cash)}}</td>
+                        </tr>
+                         <tr class="text-muted">
+                            <td width="50%"  class="text-center">Change</td>
+                            <td width="50%" class="text-center"> {{formatMoney(change)}}</td>
                         </tr>
                     </tbody>
                     <tfoot class="table-light">
@@ -71,12 +79,14 @@ export default {
             tax: 0,
             subtotal: 0,
             total: 0,
+            cash: 0,
+            change: 0,
             lists: [],
             currentDate: ''
         }
     },
     methods : {
-        set(lists,customer,payment,discount,subtotal,discounted,tax,total) {
+        set(lists,customer,payment,discount,subtotal,discounted,tax,total,cash,change) {
             this.lists = lists;
             this.customer = customer;
             this.payment = payment;
@@ -85,6 +95,8 @@ export default {
             this.discounted = discounted;
             this.tax = tax, 
             this.total = total;
+            this.cash = cash;
+            this.change = change;
             this.errors = [];
             this.showModal = true;
         },
@@ -93,12 +105,12 @@ export default {
             printWindow.document.write('<html style="width:260px; margin-bottom: 200px"><head><title>Receipt</title></head><body>');
 
             // Your receipt content goes here
-            printWindow.document.write('<center><h3>OFFICIAL RECEIPT</h3></center>');
             
             const now = new Date();
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
-      this.currentDate = now.toLocaleDateString('en-US', options);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            this.currentDate = now.toLocaleDateString('en-US', options);
 
+            // printWindow.document.write('<center><h3>POS 9 INVENTORY SYSTEM</h3></center>');
             printWindow.document.write(`
             <style>\
                 body {\
@@ -115,7 +127,7 @@ export default {
             <br/>\
             POS & INVENTORY SYSTEM\
             <br/>\
-            <span style="float: left;">Customer:</span> <span style="float: right; margin-right: 0;">` + this.customer.name + `</span>\
+            <span style="font-size: 9px;">SALES INVOINCE</span>\
             <br/>\
             <span style="float: left;">Date:</span> <span style="float: right; margin-right: 0;">` + this.currentDate + `</span>\
             <br/>\
@@ -139,15 +151,26 @@ export default {
                 </tbody>
             </table>
             _________________________________________________\
-            <span style="float: left;">Subtotal:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.subtotal) + `</span>\
-            <br/>\
-            <br/>\
-            <span style="float: left;">Discount:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.discounted) + `</span>\
-            <br/>\
-            <span style="float: left;">Tax:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.tax) + `</span>\
-            <br/>\
-            <span style="float: left; font-weight: bold;">Total:</span> <span style="float: right; font-weight: bold; margin-right: 0;">` + this.formatMoney(this.total) + `</span>\
-            <br/>\
+            <div style="width: 50%; float: right;">
+                <span style="float: left;">Subtotal:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.subtotal) + `</span>\
+                <br/>\
+                <br/>\
+                <span style="float: left;">Discount:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.discounted) + `</span>\
+                <br/>\
+                <span style="float: left;">Tax:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.tax) + `</span>\
+                <br/>\
+                <span style="float: left; font-weight: bold;">Total:</span> <span style="float: right; font-weight: bold; margin-right: 0;">` + this.formatMoney(this.total) + `</span>\
+                <br/>\
+                <br/>\
+                <span style="float: left;">Cash:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.cash) + `</span>\
+                <br/>\
+                <span style="float: left;">Change:</span> <span style="float: right; margin-right: 0;">` + this.formatMoney(this.change) + `</span>\
+                <br/>\
+                <br/>\
+                <span style="float: left;">Customer:</span> <span style="float: right; margin-right: 0;">` + this.customer.name + `</span>\
+                <br/>\
+                <span style="float: left;">Contact</span> <span style="float: right; margin-right: 0;">` + this.customer.contact + `</span>\
+            </div>
             `);
 
             printWindow.document.write('</body></html>');
@@ -167,6 +190,8 @@ export default {
                 tax: this.tax,
                 subtotal: this.subtotal,
                 total: this.total,
+                cash: this.cash,
+                change: this.change,
                 status_id: 24,
                 lists: this.lists
             })

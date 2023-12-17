@@ -8,7 +8,7 @@
                         <b-col sm="auto">
                             <div class="input-group">
                                 <flat-pickr v-model="date" :config="config" class="form-control border-0 dash-filter-picker shadow"></flat-pickr>
-                                <div style="cursor: pointer;" @click="fetchMine()" class="input-group-text bg-primary border-primary text-white">
+                                <div style="cursor: pointer;" @click="fetch()" class="input-group-text bg-primary border-primary text-white">
                                     <i class="ri-calendar-2-line"></i>
                                 </div>
                             </div>
@@ -28,6 +28,7 @@
                                     <th scope="col" class="text-center">Product</th>
                                     <th scope="col" class="text-center">Quantity</th>
                                     <th scope="col" class="text-center">Reason</th>
+                                    <th scope="col" class="text-center">Managed By</th>
                                     <th scope="col" class="text-center">Date</th>
                                 </tr>
                             </thead>
@@ -36,6 +37,7 @@
                                     <td class="text-center">{{list.product.name}}</td>
                                     <td class="text-center">{{list.quantity}}</td>
                                     <td class="text-center">{{list.reason}}</td>
+                                    <td class="text-center">{{list.user.name}}</td>
                                     <td class="text-center">{{list.created_at}}</td>
                                 </tr>
                             </tbody>

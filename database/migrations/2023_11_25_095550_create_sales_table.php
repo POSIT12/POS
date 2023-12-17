@@ -21,6 +21,8 @@ return new class extends Migration
             $table->decimal('discount',12,2);
             $table->decimal('tax',12,2);
             $table->decimal('total',12,2);
+            $table->decimal('cash',12,2);
+            $table->decimal('change',12,2);
             $table->tinyInteger('status_id')->unsigned()->index();
             $table->foreign('status_id')->references('id')->on('dropdowns')->onDelete('cascade');
             $table->tinyInteger('payment_id')->unsigned()->index();
@@ -29,6 +31,8 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('discount_id')->unsigned()->index();
             $table->foreign('discount_id')->references('id')->on('discounts')->onDelete('cascade');
+            $table->bigInteger('managed_by')->unsigned()->index();
+            $table->foreign('managed_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -81,8 +81,8 @@ class ProductController extends Controller
                     $query->where('id',$category);
                 });
             })
-            ->with('category','orders.status','sales','discounts')
-            ->orderBy('id','asc')
+            ->with('category','orders.status','sales','discounts','percentage')
+            ->orderBy('updated_at','desc')
             ->paginate(10)
             ->withQueryString()
         );
@@ -91,7 +91,13 @@ class ProductController extends Controller
 
     public function update(Request $request){
         if($request->type == 'adjustment'){
-            $prod = ProductAdjustment::create($request->all());
+
+            $validated = $request->validate([
+                'reason' => 'required',
+                'quantity' => 'required|integer|min:1'
+            ]);
+
+            $prod = ProductAdjustment::create(array_merge($request->all(),['managed_by' => \Auth::user()->id]));
             if($prod){
                 $data = Product::where('id',$request->product_id)->first();
                 $data->stock = $data->stock - $request->quantity;

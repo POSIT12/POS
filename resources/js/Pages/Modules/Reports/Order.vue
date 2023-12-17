@@ -3,12 +3,12 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header border-0 align-items-center d-flex">
-                    <h5 class="card-title mb-0 flex-grow-1">Orders Report</h5>
+                    <h5 class="card-title mb-0 flex-grow-1">Delivery Report</h5>
                     <div class="hstack gap-1">
                         <b-col sm="auto">
                             <div class="input-group">
                                 <flat-pickr v-model="date" :config="config" class="form-control border-0 dash-filter-picker shadow"></flat-pickr>
-                                <div style="cursor: pointer;" @click="fetchMine()" class="input-group-text bg-primary border-primary text-white">
+                                <div style="cursor: pointer;" @click="fetch()" class="input-group-text bg-primary border-primary text-white">
                                     <i class="ri-calendar-2-line"></i>
                                 </div>
                             </div>
@@ -26,20 +26,20 @@
                             <thead class="text-muted table-light">
                                 <tr>
                                     <th scope="col" class="text-center">Supplier</th>
-                                    <th scope="col" class="text-center">Type</th>
                                     <th scope="col" class="text-center">Product</th>
                                     <th scope="col" class="text-center">Quantity</th>
                                     <th scope="col" class="text-center">Price</th>
+                                    <th scope="col" class="text-center">Total</th>
                                     <th scope="col" class="text-center">Date</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="(list,index) in lists" v-bind:key="index">
                                     <td class="text-center">{{list.supplier}}</td>
-                                    <td class="text-center">{{list.type}}</td>
                                     <td class="text-center">{{list.product}}</td>
                                     <td class="text-center">{{list.quantity}}</td>
                                     <td class="text-center">{{formatMoney(list.price)}}</td>
+                                    <th class="text-center">{{formatMoney(list.total)}}</th>
                                     <td class="text-center">{{list.date}}</td>
                                 </tr>
                             </tbody>

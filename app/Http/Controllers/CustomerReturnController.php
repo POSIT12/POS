@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sale;
 use App\Models\Product;
 use App\Models\SaleList;
 use App\Models\SaleListReturn;
@@ -55,18 +56,34 @@ class CustomerReturnController extends Controller
         ]);
 
         $data = SaleList::where('id',$request->id)->first();
-        $data->status_id = $request->status_id;
+        if($request->quantity == $data->quantity){
+            $data->status_id = $request->status_id;
+        }else{
+            dd($request->quantity);
+            $data->quantity = $data->quantity - $request->quantity;
+        }
         if($request->reason_id == 34){
             $prod = Product::where('id',$data->product_id)->first();
-            $prod->stock = $prod->stock + 1;
-            $prod->save();
+            $prod->stock = $prod->stock + $request->quantity;
+            if($prod->save()){
+                if($request->all){
+                    $s = Sale::where('id',$data->sale_id)->update(['status_id' => 25]);
+                }else{
+                    $s = Sale::where('id',$data->sale_id)->first();
+                    $s->total = $request->sale_total;
+                    $s->subtotal = $request->sale_subtotal;
+                    $s->tax = $request->sale_tax;
+                    $s->discount = $request->sale_discount;
+                    $s->save();
+                }
+            }
         }
         if($data->save()){
             $return = new SaleListReturn;
             $return->reason = $request->reason;
             $return->reason_id = $request->reason_id;
             $return->quantity = $request->quantity;
-            $return->total = $request->total;
+            $return->total = $request->refund;
             $return->salelist_id = $request->id;
             $return->managed_by = \Auth::user()->id;
             $return->save();
@@ -82,7 +99,7 @@ class CustomerReturnController extends Controller
 
     public function lists($request){
         $data = DefaultResource::collection(
-            SaleList::with('product','sale.customer','status')
+            SaleList::with('product','sale.customer','sale.discounted','status')
             ->whereDate('warranty', '>=', now())
             ->where('status_id',27)
             ->orderBy('id','desc')
