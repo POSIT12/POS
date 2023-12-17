@@ -23,10 +23,10 @@ class CustomersTableSeeder extends Seeder
             array (
                 'contact' => '09123654789',
                 'created_at' => '2023-12-11 19:59:37',
-                'email' => 'benjamin@yahoo.com',
+                'email' => 'customer@genpos8.com',
                 'id' => 1,
                 'is_active' => 1,
-                'name' => 'Benjamin Jose',
+                'name' => 'Default',
                 'updated_at' => '2023-12-11 19:59:37',
             ),
             1 => 
