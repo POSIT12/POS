@@ -14,6 +14,9 @@ class CustomerController extends Controller
             case 'lists':
                return $this->lists($request);
             break;
+            case 'names':
+                return $this->names($request);
+             break;
             default : 
             return inertia('Modules/Maintenance/Customers/Index');
         }
@@ -49,6 +52,17 @@ class CustomerController extends Controller
     public function lists($request){
         $data = DefaultResource::collection(
             Customer::when($request->keyword, function ($query, $keyword) {
+                $query->where('name', 'LIKE', '%'.$keyword.'%');
+            })
+            ->orderBy('id','asc')
+            ->paginate(10)
+            ->withQueryString()
+        );
+        return $data;
+    }
+    public function names($request){
+        $data = DefaultResource::collection(
+            Customer::when($request->name, function ($query, $keyword) {
                 $query->where('name', 'LIKE', '%'.$keyword.'%');
             })
             ->orderBy('id','asc')

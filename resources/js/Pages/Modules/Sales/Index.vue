@@ -116,11 +116,42 @@
                 <div class="card-header bg-light-subtle border-bottom-dashed">
                     <div class="row g-2">
                         <div class="col-md-12 ">
-                            <multiselect v-model="customer" id="ajax" label="name" track-by="id"
+                            <form class="app-search d-none d-md-block p-0 mb-2">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" placeholder="Search Customer" autocomplete="off" id="search-options1" />
+                                    <span class="mdi mdi-magnify search-widget-icon"></span>
+                                    <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options1"></span>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-lg" id="search-dropdown1">
+                                    <SimpleBar data-simplebar>
+                                        <div class="notification-list" v-if="names.length > 0">
+                                            <b-link @click="select(list)"
+                                                class="d-flex dropdown-item notify-item py-2"
+                                                v-for="(list, index) of names" :key="index">
+                                                <div class="flex-1">
+                                                    <h6 class="m-0">{{list.name}}</h6>
+                                                </div>
+                                            </b-link>
+                                        </div>
+                                        <div class="notification-list" v-else>
+                                            <div class="d-grid gap-2">
+                                                <button class="btn btn-primary btn-sm" @click="newName()"
+                                                    type="button" block="">
+                                                    <div class="btn-content">Add name</div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </SimpleBar>
+                                </div>
+                            </form>
+                            <!-- <multiselect v-model="customer" id="ajax" label="name" track-by="id"
                                 placeholder="Select Customer" open-direction="bottom" :options="customers"
                                 :allow-empty="false"
                                 :show-labels="false">
-                            </multiselect> 
+                            </multiselect>  -->
+                        </div>
+                         <div class="col-md-12 mt-2">
+                            <input type="text" class="form-control text-primary fw-bold" v-model="customer.name" readonly>
                         </div>
                         <div class="col-md-12 mt-2">
                             <multiselect v-model="discount" id="ajax" label="name" track-by="id"
@@ -146,7 +177,7 @@
 
                
              
-                <div class="card-body" style="height: calc(100vh - 404px); overflow: auto;">
+                <div class="card-body" style="height: calc(100vh - 460px); overflow: auto;">
                     <div class="table-responsive">
                         <table class="table mb-0">
                             <tbody>
@@ -190,8 +221,11 @@
     <Nothing ref="nothing"/>
     <Search :categories="categories" @add="addItem" ref="search"/>
     <View ref="view"/>
+    <New ref="new"/>
 </template>
 <script>
+import New from './New.vue';
+import { SimpleBar } from "simplebar-vue3";
 import Confirm from './Confirm.vue';
 import Search from './Search.vue';
 import Nothing from './Nothing.vue';
@@ -199,7 +233,7 @@ import View from './View.vue';
 import Multiselect from '@suadelabs/vue3-multiselect';
 import Pagination from "@/Shared/Components/Pagination.vue";
 export default {
-    components : { Pagination,Multiselect, Nothing, Search, Confirm, View },
+    components : { Pagination,Multiselect, Nothing, Search, Confirm, View, SimpleBar, New },
     props: ['categories','suppliers','units','dropdowns','customers','discounts'],
     data() {
         return {
@@ -215,11 +249,17 @@ export default {
             lists: [],
             meta: {},
             links: {},
-            cash: ''
+            cash: '',
+            names: [],
+            name: '',
+            status: ''
         };
     },
     created(){
         this.fetchLists();
+    },
+     mounted() {
+        this.isCustomDropdown();
     },
     watch: {
         keyword(newVal){
@@ -231,8 +271,21 @@ export default {
             }else{
                 this.discounted = newVal.value;
             }
-        }
+        },
+        data: {
+            deep: true,
+            handler(val = null) {
+                if(val != null && val !== ''){
+                    if(this.status == 'name'){
+                        this.customer = val.data;
+                    }else{
+
+                    }
+                }
+            },
+        },
     },
+
     computed: {
         subtotal() {
             return this.items.reduce((total, item) => total + item.total, 0);
@@ -259,7 +312,10 @@ export default {
             }else{
                 return 0;
             }
-        }
+        },
+         data() {
+            return this.$page.props.flash.data;
+        },
     },
     methods: {
         create(){
@@ -374,7 +430,75 @@ export default {
             }
             this.items[index].discounted = d;
             return this.formatMoney(d);
-        }
+        },
+         select(data){
+            this.customer = data;
+        },
+        newName(){
+            this.status = 'name';
+            this.$refs.new.show(this.name);
+        },
+        checkSearchStr1: _.debounce(function(string) {
+            this.name = string;
+            this.fetchNames();
+        }, 300),
+        fetchNames(page_url) {
+            page_url = page_url || '/customers';
+            axios.get(page_url, {
+                params: {
+                    name: this.name,
+                    options: 'names',
+                }
+            })
+            .then(response => {
+                if (response) {
+                    this.names = response.data.data;
+                }
+            })
+            .catch(err => console.log(err));
+        },
+        isCustomDropdown() {
+            var searchOptions = document.getElementById("search-close-options1");
+            var dropdown = document.getElementById("search-dropdown1");
+            var searchInput = document.getElementById("search-options1");
+
+            searchInput.addEventListener("focus", () => {
+                var inputLength = searchInput.value.length;
+                if (inputLength > 0) {
+                    dropdown.classList.add("show");
+                    searchOptions.classList.remove("d-none");
+                } else {
+                    dropdown.classList.remove("show");
+                    searchOptions.classList.add("d-none");
+                }
+            });
+
+            searchInput.addEventListener("keyup", () => {
+                var inputLength = searchInput.value.length;
+                if (inputLength > 0) {
+                    dropdown.classList.add("show");
+                    searchOptions.classList.remove("d-none");
+                    this.checkSearchStr1(searchInput.value);
+                } else {
+                    dropdown.classList.remove("show");
+                    searchOptions.classList.add("d-none");
+                }
+            });
+
+            searchOptions.addEventListener("click", () => {
+                searchInput.value = "";
+                this.name = null;
+                dropdown.classList.remove("show");
+                searchOptions.classList.add("d-none");
+            });
+
+            document.body.addEventListener("click", (e) => {
+                if (e.target.getAttribute("id") !== "search-options1") {
+                    dropdown.classList.remove("show");
+                    searchOptions.classList.add("d-none");
+                }
+            });
+        },
     }
 }
 </script>
@@ -387,4 +511,8 @@ export default {
     min-height: 37px;
     height: 37px;
 } 
+
+.dropdown-menu-lg {
+    width: 95%;
+}
 </style>
