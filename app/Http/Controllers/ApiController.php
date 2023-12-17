@@ -83,17 +83,17 @@ class ApiController extends Controller
             $code = 'SLS'.date('Y').date('m').date('d')."-".str_pad((Sale::count()+1), 4, '0', STR_PAD_LEFT);  
             $lists = $request->lists;
 
-            if(!$request->customer_id){
-                $customer = new Customer;
-                $customer->name = $request->name;
-                $customer->email = $request->email;
-                $customer->contact = $request->contact;
-                $customer->save();
+            // if(!$request->customer_id){
+            //     $customer = new Customer;
+            //     $customer->name = $request->name;
+            //     $customer->email = $request->email;
+            //     $customer->contact = $request->contact;
+            //     $customer->save();
 
-                $customer_id = $customer->id;
-            }else{
-                $customer_id = $request->customer_id;
-            }
+            //     $customer_id = $customer->id;
+            // }else{
+            //     $customer_id = $request->customer_id;
+            // }
             
             $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id]));
             if($data){
