@@ -53,6 +53,15 @@ class ApiController extends Controller
         } 
     }
 
+    public function store_customer(Request $request){
+        $data = Customer::create($request->all());
+        if($data){
+            return response()->json(['message' => 'Success','data' => $data]);
+        }else{
+            return response()->json(['message' => 'Failed']);
+        }
+    }
+
     public function store(StoreRequest $request){
 
         // return response()->json(['message' => 'User created successfully']);
