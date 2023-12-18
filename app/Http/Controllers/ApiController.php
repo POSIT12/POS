@@ -63,7 +63,7 @@ class ApiController extends Controller
         }
     }
 
-    public function store(StoreRequest $request){
+    public function store(Request $request){
         // $bearer = $request->bearerToken();
         // $token = PersonalAccessToken::findToken($bearer);
         // dd($token);
@@ -100,7 +100,7 @@ class ApiController extends Controller
             // }
           
 
-            $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id,'managed_by' => $id]));
+            $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id,'managed_by' => 1]));
             if($data){
                 foreach($lists as $list){
                     $l = new SaleList;
