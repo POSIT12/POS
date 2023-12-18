@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/backups', App\Http\Controllers\BackupController::class);
     Route::resource('/terms', App\Http\Controllers\TermController::class);
 
+    Route::resource('/roles', App\Http\Controllers\RoleController::class);
+
     Route::get('/reports/{type}', [App\Http\Controllers\ReportController::class, 'index']);
     Route::get('reports/{month}/edit', [App\Http\Controllers\ReportController::class, 'edit']);
     Route::get('reports/{month}/sales', [App\Http\Controllers\ReportController::class, 'sales']);
