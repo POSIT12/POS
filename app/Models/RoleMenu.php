@@ -9,4 +9,10 @@ class RoleMenu extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function menu()
+    {
+        return $this->belongsTo('App\Models\Menu', 'menu_id', 'id');
+    } 
+
 }

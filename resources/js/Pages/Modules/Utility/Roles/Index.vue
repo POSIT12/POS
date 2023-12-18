@@ -44,7 +44,6 @@
                     </multiselect> 
                 </div>
             </div>
-            
 
         </div>
     </b-form>
@@ -54,7 +53,7 @@
 import Multiselect from '@suadelabs/vue3-multiselect';
 export default {
     components: { Multiselect },
-    props: ['dropdowns'],
+    props: ['dropdowns','cashiers','assistants','owners','inventories'],
     data(){
         return {
             inventory_manager: [],
@@ -63,6 +62,12 @@ export default {
             owner: [],
             form: {}
         }
+    },
+    created(){
+        this.cashier = this.cashiers.data;
+        this.assistant_clerk = this.assistants.data;
+        this.owner = this.owners.data;
+        this.inventory_manager = this.inventories.data;
     },
     computed: {
         roles : function() {

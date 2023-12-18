@@ -6052,7 +6052,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Multiselect: (_suadelabs_vue3_multiselect__WEBPACK_IMPORTED_MODULE_0___default())
   },
-  props: ['dropdowns'],
+  props: ['dropdowns', 'cashiers', 'assistants', 'owners', 'inventories'],
   data: function data() {
     return {
       inventory_manager: [],
@@ -6061,6 +6061,12 @@ __webpack_require__.r(__webpack_exports__);
       owner: [],
       form: {}
     };
+  },
+  created: function created() {
+    this.cashier = this.cashiers.data;
+    this.assistant_clerk = this.assistants.data;
+    this.owner = this.owners.data;
+    this.inventory_manager = this.inventories.data;
   },
   computed: {
     roles: function roles() {
