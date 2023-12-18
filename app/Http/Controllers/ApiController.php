@@ -64,7 +64,10 @@ class ApiController extends Controller
     }
 
     public function store(StoreRequest $request){
-
+        $bearer = $request->bearerToken();
+        $token = PersonalAccessToken::findToken($bearer);
+        dd($token);
+        $id = $token->tokenable->id;
         // return response()->json(['message' => 'User created successfully']);
 
         // $request->validate([
@@ -95,9 +98,7 @@ class ApiController extends Controller
             // }else{
             //     $customer_id = $request->customer_id;
             // }
-            $bearer = $request->bearerToken();
-            $token = PersonalAccessToken::findToken($bearer);
-            $id = $token->tokenable->id;
+          
 
             $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id,'managed_by' => $id]));
             if($data){
