@@ -86,19 +86,6 @@ class ApiController extends Controller
             $code = 'SLS'.date('Y').date('m').date('d')."-".str_pad((Sale::count()+1), 4, '0', STR_PAD_LEFT);  
             $lists = $request->lists;
 
-            // if(!$request->customer_id){
-            //     $customer = new Customer;
-            //     $customer->name = $request->name;
-            //     $customer->email = $request->email;
-            //     $customer->contact = $request->contact;
-            //     $customer->save();
-
-            //     $customer_id = $customer->id;
-            // }else{
-            //     $customer_id = $request->customer_id;
-            // }
-          
-
             $data = Sale::create(array_merge($request->all(),['code' => $code,'managed_by' => $id]));
             if($data){
                 foreach($lists as $list){
@@ -111,6 +98,32 @@ class ApiController extends Controller
                     $l->type = $list['type'];
                     if($list['type'] == 'Product'){
                         $l->product_id = $list['id'];
+
+                        if($list['has_warranty']){
+                            $warranty = $list['warranty'];
+                            $currentDate = now();
+                            $parts = explode(' ', $warranty);
+
+                            $numericValue = (int)$parts[0];
+                            $timeUnit = $parts[1];
+// dd($timeUnit);
+                            switch($timeUnit){
+                                case 'Years':
+                                    $warranty_date = ($numericValue == 1) ? $currentDate->modify('+1 year') :  $currentDate->modify('+'.$numericValue.' years');
+                                break;
+                                case 'Months':
+                                    $warranty_date = ($numericValue == 1) ? $currentDate->modify('+1 month') :  $currentDate->modify('+'.$numericValue.' months');
+                                break;
+                                case 'Weeks':
+                                    $warranty_date = ($numericValue == 1) ? $currentDate->modify('+1 week') :  $currentDate->modify('+'.$numericValue.' weeks');
+                                break;
+                                case 'Days':
+                                    $warranty_date = ($numericValue == 1) ? $currentDate->modify('+1 day') :  $currentDate->modify('+'.$numericValue.' days');
+                                break;
+                            }
+
+                            $l->warranty = $warranty_date;
+                        }
                     }else{
                         $l->package_id = $list['id'];
                     }
