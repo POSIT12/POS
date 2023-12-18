@@ -1,7 +1,7 @@
 <template>
     <div id="layout-wrapper">
         <Header />
-        <Menu :role="role"/>
+        <Menu :role_menus="role_menus" :role="role"/>
         <!-- @include('layouts.sidebar') -->
         <div class="main-content">
             <div class="page-content">
@@ -20,7 +20,7 @@ import Header from '../Components/Header.vue';
 import Footer from '../Components/Footer.vue';
 import Menu from '../Components/Menu.vue';
 export default {
-    props: ['role'],
+    props: ['role','role_menus'],
     components : { Footer, Header, SimpleBar, Menu },
     data() {
         return {

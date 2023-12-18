@@ -31,7 +31,8 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => (\Auth::check()) ? new UserResource(\Auth::user()) : '',
-            'role' => (\Auth::check()) ? \Auth::user()->role->menus : '',
+            'role' => (\Auth::check()) ? \Auth::user()->role->name : '',
+            'role_menus' => (\Auth::check()) ? \Auth::user()->role->menus : '',
             'flash' => [
                 'message' => session('message'),
                 'data' => session('data'),

@@ -1,5 +1,5 @@
 <template>
-    <Vertical :role="role"> <slot/> </Vertical>
+    <Vertical :role="role" :role_menus="role_menus"> <slot/> </Vertical>
     <b-modal v-model="message" hide-footer class="v-modal-custom" modal-class="zoomIn" body-class="p-0" centered hide-header-close>
         <div class="text-end me-4">
             <button type="button" class="btn-close text-end" @click="check()"></button>
@@ -24,7 +24,7 @@
 <script>
 import Vertical from './Vertical.vue';
 export default {
-    props: ['role'],
+    props: ['role','role_menus'],
     components : { Vertical },
     computed: {
         message() {
