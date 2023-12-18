@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-12">
                     <label>Role: <span v-if="form.errors" v-text="form.errors.role" class="haveerror"></span></label>
-                    <multiselect v-model="user.role" id="ajax"
+                    <multiselect v-model="user.role" id="ajax" 
                         placeholder="Select Role" open-direction="bottom" :options="roles"
                         :allow-empty="false"
                         :show-labels="false">

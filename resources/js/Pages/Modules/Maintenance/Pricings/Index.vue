@@ -61,7 +61,7 @@ export default {
     props: ['dropdowns'],
     data() {
         return {
-            title: "Pricing Management",
+            title: "Pricing Managements",
             items: [{text: "View",href: "/"},{ text: "Dasboard",active: true}, ],
             keyword: '',
             term: null,
