@@ -42,23 +42,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                      <tr>
                         <td>Subtotal</td>
                         <td class="text-center">{{formatMoney(refund_subtotal)}}</td>
                         <td class="text-center">{{formatMoney(selected.sale.subtotal)}}</td>
                         <td class="text-center text-success">{{formatMoney(subtotal)}}</td>
                     </tr>
                     <tr>
+                        <td>Non-Vat</td>
+                        <td class="text-center">{{formatMoney(refund_subtotal - refund_tax)}}</td>
+                        <td class="text-center">{{formatMoney(selected.sale.subtotal - selected.sale.tax)}}</td>
+                        <td class="text-center text-success">{{formatMoney(subtotal-tax)}}</td>
+                    </tr>
+                    
+                     <tr>
+                        <td>Vat</td>
+                        <td class="text-center">{{formatMoney(refund_tax)}}</td>
+                        <td class="text-center">{{formatMoney(selected.sale.tax)}}</td>
+                        <td class="text-center text-success">{{formatMoney(tax)}}</td>
+                    </tr>
+                    <tr>
                         <td>Discount</td>
                         <td class="text-center">{{formatMoney(refund_discount)}}</td>
                         <td class="text-center">{{formatMoney(selected.sale.discount)}}</td>
                         <td class="text-center text-success">{{formatMoney(discount)}}</td>
-                    </tr>
-                     <tr>
-                        <td>Tax</td>
-                        <td class="text-center">{{formatMoney(refund_tax)}}</td>
-                        <td class="text-center">{{formatMoney(selected.sale.tax)}}</td>
-                        <td class="text-center text-success">{{formatMoney(tax)}}</td>
                     </tr>
                     <tr class="table-active">
                         <th class="fs-14">Total :</th>
@@ -69,7 +76,7 @@
                             <span class="fw-semibold" id="cart-total">{{formatMoney(selected.sale.total)}}</span>
                         </td>
                         <td class="text-center fs-14 text-success">
-                            <span class="fw-semibold" id="cart-total">{{formatMoney(total)}}</span>
+                            <span class="fw-semibold" id="cart-total">{{formatMoney(selected.sale.total-refund)}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -127,10 +134,10 @@ export default {
             return  (this.selected.sale.discount - v);
         },
         total() {
-            return this.subtotal + this.tax - this.discount;
+            return (this.subtotal * this.quantity) - this.selected.sale.total;
         },
         refund(){
-            return this.refund_subtotal + this.refund_tax - this.refund_discount;
+            return this.refund_subtotal;
         }
     },
     methods: {
@@ -140,19 +147,31 @@ export default {
             this.showModal = true;
         },
         save(){
-            this.form = this.$inertia.form({
-                status_id: 28,
-                id: this.selected.id,
-                total: this.refund,
-                all: (this.selected.total == this.selected.sale.subtotal) ? true : false, 
-                quantity: this.quantity,
-                reason: this.info,
-                reason_id: (this.reason) ? this.reason.id : '',
-                sale_total: this.total,
-                sale_discount: this.discount,
-                sale_tax: this.tax,
-                sale_subtotal: this.subtotal
-            });
+            if(this.selected.sale.subtotal == this.selected.price*this.selected.quantity){
+                this.form = this.$inertia.form({
+                    status_id: 28,
+                    id: this.selected.id,
+                    total: this.selected.sale.total,
+                    all: (this.selected.sale.subtotal == this.selected.price*this.selected.quantity) ? true : false, 
+                    quantity: this.quantity,
+                    reason: this.info,
+                    reason_id: (this.reason) ? this.reason.id : '',
+                });
+            }else{
+                this.form = this.$inertia.form({
+                    status_id: 28,
+                    id: this.selected.id,
+                    total: this.refund,
+                    all: (this.refund == this.selected.sale.total) ? true : false, 
+                    quantity: this.quantity,
+                    reason: this.info,
+                    reason_id: (this.reason) ? this.reason.id : '',
+                    sale_total: this.selected.sale.total-this.refund,
+                    sale_discount: this.discount,
+                    sale_tax: this.tax,
+                    sale_subtotal: this.subtotal
+                });
+            }
 
             this.form.put('/customer/update',{
                 preserveScroll: true,

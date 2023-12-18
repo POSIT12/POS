@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label style="margin-bottom: -10px; font-size: 11px;">Warranty: <span class="text-muted fs-10">(optional)</span><span v-if="form.errors" v-text="form.errors.price" class="haveerror"></span></label>
+                    <label style="margin-bottom: -10px; font-size: 11px;">Warranty: <span class="text-muted fs-10">(optional)</span></label>
                     <div class="input-group mb-1">
                         <input type="number" v-model="product.warrantynumber" placeholder="Enter" class="form-control" style="width: 50%;">
                         <select v-model="product.warrantytype" class="form-select" id="inputGroupSelect02" style="width: 50%;">

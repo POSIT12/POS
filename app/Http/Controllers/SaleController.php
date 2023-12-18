@@ -36,6 +36,7 @@ class SaleController extends Controller
             'customer_id' => 'required',
             'discount_id' => 'required',
             'payment_id' => 'required',
+            'cash' => 'required',
             'lists' => 'required|array',
             'lists.*' => 'required|array'
         ]);

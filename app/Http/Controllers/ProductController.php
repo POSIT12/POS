@@ -34,6 +34,11 @@ class ProductController extends Controller
                 }),
             ],
             'brand' => 'required',
+            'pricing_id' => 'required',
+            'percentage_id' => 'required',
+            'size' => 'required',
+            'price' => 'required',
+            
         ]);
 
         $data = \DB::transaction(function () use ($request){
