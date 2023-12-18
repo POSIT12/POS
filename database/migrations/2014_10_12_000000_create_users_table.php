@@ -22,7 +22,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar',200)->default('avatar.jpg');
-            $table->string('role',50);
+            $table->tinyInteger('role_id')->unsigned()->index();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->boolean('is_active')->default(0);
             $table->timestamp('welcome_valid_until')->nullable();
             $table->rememberToken();

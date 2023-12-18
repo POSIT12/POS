@@ -43,7 +43,7 @@
                             <td>
                                 <h5 class="fs-13 mb-0 text-dark">{{list.name}}</h5>
                             </td>
-                            <td class="text-center"> {{list.role}}</td>
+                            <td class="text-center"> {{list.role.name}}</td>
                             <td class="text-center"> {{list.username}}</td>
                             <td class="text-center"> {{list.email}}</td>
                             <td class="text-center">
@@ -62,13 +62,14 @@
             </div>
         </b-col>
     </b-row>
-    <Create @message="fetch()" ref="create"/>
+    <Create :roles="roles" @message="fetch()" ref="create"/>
 </template>
 <script>
 import Create from './Create.vue';
 import PageHeader from "@/Shared/Components/PageHeader.vue";
 import Pagination from "@/Shared/Components/Pagination.vue";
 export default {
+    props: ['roles'],
     components: { PageHeader, Pagination, Create },
     data() {
         return {

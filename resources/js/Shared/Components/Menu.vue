@@ -211,6 +211,6 @@
 </template>
 <script>
 export default {
-    props: ['role']
+    props: ['role'],
 }
 </script>

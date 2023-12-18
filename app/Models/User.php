@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'password',
         'temp_password',
-        'role',
+        'role_id',
         'is_active',
         'avatar',
         'welcome_valid_until'
@@ -35,6 +35,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
+    } 
+
 
 
     public function setEmailAttribute($value)

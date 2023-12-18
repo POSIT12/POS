@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Role;
 use App\Models\Order;
 use App\Models\Sale;
 use App\Models\Unit;
@@ -30,7 +31,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => (\Auth::check()) ? new UserResource(\Auth::user()) : '',
-            'role' => (\Auth::check()) ? \Auth::user()->role : '',
+            'role' => (\Auth::check()) ? \Auth::user()->role->menus : '',
             'flash' => [
                 'message' => session('message'),
                 'data' => session('data'),
@@ -51,6 +52,7 @@ class HandleInertiaRequests extends Middleware
             'orders' => Order::with('lists.product','lists.status','status','supplier.supplier')->where('status_id',4)->get(),
             'sales' =>  Sale::with('lists.product','lists.package','lists.status','payment','discounted','customer','status')->orderBy('id','desc')->limit(5)->get(),
             'active_discounts' => Discount::with('type','subtype','based')->where('is_active',1)->where('type_id',16)->get(),
+            'roles' => Role::all()
         ]);
     }
 }

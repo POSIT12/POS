@@ -24,7 +24,7 @@ class UserController extends Controller
             'username' => 'sometimes|required|max:20|unique:users,username,'.$request->id,
             'email' => 'sometimes|required|email|unique:users,email,'.$request->id,
             'name' => 'required',
-            'role' => 'required'
+            'role_id' => 'required'
         ]);
         $data = \DB::transaction(function () use ($request){
             if($request->editable){
@@ -51,6 +51,7 @@ class UserController extends Controller
                 $query->where('name', 'LIKE', '%'.$keyword.'%');
             })
             // ->where('role','!=','Administrator')
+            ->with('role')
             ->orderBy('id','asc')
             ->paginate(10)
             ->withQueryString()

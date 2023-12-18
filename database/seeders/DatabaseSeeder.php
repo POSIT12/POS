@@ -14,12 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // \DB::table('roles')->insert([
+        //     'id' => 1,
+        //     'name' => 'Administrator',
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
+
+        $this->call(RolesTableSeeder::class);
         \DB::table('users')->insert([
             'username' => 'administrator',
             'email' => 'admin@genpos8.com',
             'name' => 'John Doe',
             'password' => bcrypt('123456789'),
-            'role' => 'Administrator',
+            'role_id' => 1,
             'avatar' => 'administrator.png',
             'is_active' => 1,
             'created_at' => now(),
@@ -41,5 +49,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(SalesTableSeeder::class);
         // $this->call(SaleListsTableSeeder::class);
         $this->call(PricingsTableSeeder::class);
+        $this->call(MenusTableSeeder::class);
     }
 }

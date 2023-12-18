@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-md-12">
                     <label>Role: <span v-if="form.errors" v-text="form.errors.role" class="haveerror"></span></label>
-                    <multiselect v-model="user.role" id="ajax" 
+                    <multiselect v-model="user.role" id="ajax" label="name" track-by="id"
                         placeholder="Select Role" open-direction="bottom" :options="roles"
                         :allow-empty="false"
                         :show-labels="false">
@@ -41,6 +41,7 @@
 <script>
 import Multiselect from '@suadelabs/vue3-multiselect';
 export default {
+    props: ['roles'],
     components: { Multiselect },
     data(){
         return {
@@ -52,7 +53,7 @@ export default {
                 email: '',
                 role: ''
             },
-            roles: ['Inventory Manager','Cashier','Assistant Clerk','Owner','Administrator'],
+            // roles: ['Inventory Manager','Cashier','Assistant Clerk','Owner'],
             form: {},
             editable: false,
         }
@@ -74,7 +75,7 @@ export default {
                 username: this.user.username,
                 email: this.user.email,
                 password: '123456789',
-                role: this.user.role,
+                role_id: this.user.role.id,
                 editable: this.editable
             })
 
