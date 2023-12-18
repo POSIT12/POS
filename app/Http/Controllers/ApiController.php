@@ -14,6 +14,7 @@ use App\Http\Resources\PackageResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\DefaultResource;
 use App\Http\Requests\StoreRequest;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class ApiController extends Controller
 {
@@ -94,8 +95,11 @@ class ApiController extends Controller
             // }else{
             //     $customer_id = $request->customer_id;
             // }
-            
-            $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id]));
+            $bearer = $request->bearerToken();
+            $token = PersonalAccessToken::findToken($bearer);
+            $id = $token->tokenable->id;
+
+            $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $customer_id,'managed_by' => $id]));
             if($data){
                 foreach($lists as $list){
                     $l = new SaleList;
