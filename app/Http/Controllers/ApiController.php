@@ -64,10 +64,10 @@ class ApiController extends Controller
     }
 
     public function store(StoreRequest $request){
-        $bearer = $request->bearerToken();
-        $token = PersonalAccessToken::findToken($bearer);
-        dd($token);
-        $id = $token->tokenable->id;
+        // $bearer = $request->bearerToken();
+        // $token = PersonalAccessToken::findToken($bearer);
+        // dd($token);
+        // $id = $token->tokenable->id;
         // return response()->json(['message' => 'User created successfully']);
 
         // $request->validate([
