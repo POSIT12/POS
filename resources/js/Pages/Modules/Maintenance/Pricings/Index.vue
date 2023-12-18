@@ -1,5 +1,5 @@
 <template>
-    <Head title="Terms and Condition" />
+    <Head title="Pricing Maintenance" />
     <!-- <PageHeader :title="title" :items="items" /> -->
 
     <b-row>
