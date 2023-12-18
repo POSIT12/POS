@@ -12,10 +12,10 @@
                     <div class="input-group mb-1">
                         <span class="input-group-text"> <i class="ri-search-line search-icon"></i></span>
                         <input type="text" v-model="keyword" placeholder="Search Name" class="form-control" style="width: 25%;">
-                        <select v-model="category" @change="fetch()" class="form-select" id="inputGroupSelect02">
+                        <!-- <select v-model="category" @change="fetch()" class="form-select" id="inputGroupSelect02">
                             <option :value="null" selected>Select Category</option>
                             <option :value="list.id" v-for="list in categories" v-bind:key="list.id">{{list.name}}</option>
-                        </select>
+                        </select> -->
                         <!-- <b-button @click="openCreate()" type="button" variant="primary">
                             <i class="ri-add-circle-fill align-bottom me-1"></i> New Order
                         </b-button> -->

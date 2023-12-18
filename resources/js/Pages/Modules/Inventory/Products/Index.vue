@@ -34,6 +34,7 @@
                             <th style="width: 12%;" class="text-center">Code</th>
                             <th style="width: 21%;" class="text-center">Name</th>
                             <th style="width: 14%;" class="text-center">Brand</th>
+                            <th style="width: 14%;" class="text-center">Unit</th>
                             <th style="width: 13%;" class="text-center">Category</th>
                             <th style="width: 7%;" class="text-center">Stock</th>
                             <th style="width: 7%;" class="text-center">Discount</th>
@@ -50,6 +51,7 @@
                                 <h5 class="fs-12 mb-0">{{list.name}}</h5>
                             </td>
                             <td class="text-center"> {{list.brand}}</td>
+                             <td class="text-center"> {{list.size}} {{list.unit.name}}</td>
                             <td class="text-center"> {{list.category.name}}</td>
                             <td class="text-center"> {{list.stock}}</td>
                             <td class="text-center"> -</td>

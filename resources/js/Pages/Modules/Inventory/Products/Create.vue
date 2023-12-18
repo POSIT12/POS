@@ -36,16 +36,17 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label style="margin-bottom: -10px; font-size: 11px;">Percentage: <span v-if="form.errors" v-text="form.errors.percentage_id" class="haveerror"></span></label>
+                    <label style="margin-bottom: -10px; font-size: 11px;">Total Price with Percentage: <span v-if="form.errors" v-text="form.errors.percentage_id" class="haveerror"></span></label>
                     <div class="input-group mb-1">
-                        <select v-model="product.percentage" class="form-select" id="inputGroupSelect02">
+                        <input type="text" v-model="product.price" placeholder="Price" class="form-control" style="width: 70%;" readonly>
+                        <select v-model="product.percentage" class="form-select" id="inputGroupSelect02" style="width: 30%;">
                             <option :value="null" selected>Select</option>
                             <option :value="list.id" v-for="list in percentages" v-bind:key="list.id">{{list.percentage}}%</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label style="margin-bottom: -10px; font-size: 11px;">Size: <span v-if="form.errors" v-text="form.errors.size" class="haveerror"></span></label>
+                    <label style="margin-bottom: -10px; font-size: 11px;">Unit: <span v-if="form.errors" v-text="form.errors.size" class="haveerror"></span></label>
                     <div class="input-group mb-1">
                         <input type="text" v-model="product.size" placeholder="Size" class="form-control" style="width: 50%;">
                         <select v-model="product.unit" class="form-select" id="inputGroupSelect02" style="width: 50%;">
@@ -65,6 +66,11 @@
                             <option value="Weeks" selected>Weeks</option>
                             <option value="Days" selected>Days</option>
                         </select>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                   <div class="form-group">
+                        <textarea v-model="product.description" class="form-control" maxlength="225" rows="2" placeholder="Description"></textarea>
                     </div>
                 </div>
                 <!-- <div class="col-md-3 mt-2">
@@ -124,7 +130,8 @@ export default {
                 percentage: 1,
                 warrantynumber: '',
                 warrantytype: null,
-                unit: this.units[12].id
+                unit: this.units[12].id,
+                description: ''
             },
             form: {},
             editable: false,
@@ -160,6 +167,7 @@ export default {
                 price: this.product.price,
                 unit_id: (this.product.unit) ? this.product.unit : '',
                 size: this.product.size,
+                description: this.product.description,
                 warranty: (this.product.warrantynumber) ? this.product.warrantynumber+' '+this.product.warrantytype : '',
                 category_id: (this.product.category) ? this.product.category.id : '',
                 editable: this.editable

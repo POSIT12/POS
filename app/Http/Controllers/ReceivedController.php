@@ -38,6 +38,9 @@ class ReceivedController extends Controller
                 if($receiveds){
                     $product = Product::where('id',$product_id)->first();
                     $product->stock = $product->stock + $received;
+                    if($product->price != $request->price){
+                        $product->price = $request->price;
+                    }
                     $product->save();
                 }
             }

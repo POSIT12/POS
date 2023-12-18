@@ -25,20 +25,20 @@
                         :show-labels="false">
                     </multiselect> 
                 </div>
-                <div class="col-md-6 mt-3" v-if="status.name == 'Received' || status.name == 'Incomplete'">
+                <div class="col-md-6 mt-3" v-if="status.name != 'Not Available' && status.name != 'Cancelled'">
                     <div class="form-group">
                         <label>Received Quantity:<span v-if="form.errors" v-text="form.errors.received" class="haveerror"></span></label>
                         <input type="text" class="form-control" v-model="received">
                     </div>
                 </div>
-                <div class="col-md-6 mt-3" v-if="status.name == 'Received' || status.name == 'Incomplete'">
+                <div class="col-md-6 mt-3" v-if="status.name != 'Not Available' && status.name != 'Cancelled'">
                     <div class="form-group">
                         <label>Price:<span v-if="form.errors" v-text="form.errors.price" class="haveerror"></span></label>
                         <input type="text" class="form-control" v-model="price">
                         <!-- <Amount class="text-center" @amount="handleAmount" :size="'form-control'" ref="testing" :readonly="false"/> -->
                     </div>
                 </div>
-                <div class="col-md-12 mt-3" v-if="status.name == 'Received' || status.name == 'Incomplete'">
+                <div class="col-md-12 mt-3" v-if="status.name != 'Not Available' && status.name != 'Cancelled'">
                     <hr class="text-muted"/>
                     <div class="form-group">
                         <label>Total:<span v-if="form.errors" v-text="form.errors.price" class="haveerror"></span></label>

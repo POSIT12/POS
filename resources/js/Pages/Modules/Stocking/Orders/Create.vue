@@ -46,7 +46,7 @@
                                     <th class="text-center" width="35%">Type</th>
                                     <th class="text-center" width="10%">Qnty</th>
                                     <th class="text-center" width="15%">Unit Price</th>
-                                    <th class="text-center" width="15%">Price</th>
+                                    <!-- <th class="text-center" width="15%">Price</th> -->
                                     <th class="text-center" width="25%">Total</th>
                                 </tr>
                             </thead>
@@ -71,12 +71,12 @@
                                     <td class="text-center" width="15%">
                                         <input type="text" readonly class="form-control form-control-sm text-center" :value="formatMoney(order.lists[index].current)" placeholder="Amount" required>
                                     </td>
-                                    <td class="text-center" width="15%">
+                                    <!-- <td class="text-center" width="15%">
                                         <Amount class="text-center" @change="check('amount',index)" :style="(form.errors && form.errors[`lists.${index}.price`]) ? 'color: red':''" @amount="handleAmount" :index="index" :size="'form-control-sm'" ref="testing" :readonly="false"/>
-                                        <!-- <input type="text" class="form-control form-control-sm" v-model="tub.amount" placeholder="Amount" required> -->
-                                    </td>
+                                        <input type="text" class="form-control form-control-sm" v-model="tub.amount" placeholder="Amount" required>
+                                    </td> -->
                                     <td width="25%" class="text-center">
-                                        <input type="text" readonly class="form-control form-control-sm text-center" :value="formatMoney(order.lists[index].quantity * order.lists[index].price)" placeholder="Amount" required>
+                                        <input type="text" readonly class="form-control form-control-sm text-center" :value="formatMoney(order.lists[index].quantity * order.lists[index].current)" placeholder="Amount" required>
                                     </td>
                                 </tr>
                             </tbody>
@@ -172,6 +172,9 @@ export default {
                 }else{
                     this.form.errors[`lists.${index}.price`] = '';
                 }
+            }
+             if(data == 'quantity'){
+                this.order.lists[index].price = this.order.lists[index].current;
             }
             if(data == 'product'){
                 this.order.lists[index].current = this.order.lists[index].product.price;

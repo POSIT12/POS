@@ -30,6 +30,7 @@
                                 <th width="5%" class="text-center">#</th>
                                 <th width="37%">Product</th>
                                 <th class="text-center" width="10%">Quantity</th>
+                                <th class="text-center" width="10%">Received</th>
                                 <th class="text-center" width="13%">Price</th>
                                 <th class="text-center" width="13%">Total</th>
                                 <th class="text-center" width="10%">Status</th>
@@ -41,6 +42,7 @@
                                 <td class="text-center">{{index+1}}</td>
                                 <td>{{list.product.name}}</td>
                                 <td class="text-center">{{list.quantity}}</td>
+                                <td class="text-center">{{list.received}}</td>
                                 <td class="text-center">{{formatMoney(list.price) }}</td>
                                 <td class="text-center">{{formatMoney(list.quantity *list.price)}}</td>
                                 <td class="text-center">

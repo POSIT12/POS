@@ -294,7 +294,7 @@ class DropdownsTableSeeder extends Seeder
                 'classification' => 'Orderlist',
                 'color' => 'bg-info',
                 'id' => 32,
-                'name' => 'Incomplete',
+                'name' => 'Partial Delivery',
                 'others' => 'n/a',
                 'type' => 'n/a',
             ),
@@ -324,6 +324,213 @@ class DropdownsTableSeeder extends Seeder
                 'name' => 'Refunded',
                 'others' => 'text-success',
                 'type' => 'n/a',
+            ),
+            34 => 
+            array (
+                'classification' => 'Home',
+                'color' => 'n/a',
+                'id' => 37,
+                'name' => 'Home',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            35 => 
+            array (
+                'classification' => 'Cashiering',
+                'color' => 'n/a',
+                'id' => 38,
+                'name' => 'Cashiering',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            36 => 
+            array (
+                'classification' => 'Inventory',
+                'color' => 'n/a',
+                'id' => 39,
+                'name' => 'Product Management',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            37 => 
+            array (
+                'classification' => 'Inventory',
+                'color' => 'n/a',
+                'id' => 40,
+                'name' => 'Package Management',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            38 => 
+            array (
+                'classification' => 'Inventory',
+                'color' => 'n/a',
+                'id' => 41,
+                'name' => 'Customer Return',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            39 => 
+            array (
+                'classification' => 'Inventory',
+                'color' => 'n/a',
+                'id' => 42,
+                'name' => 'Supplier Return',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            40 => 
+            array (
+                'classification' => 'Product Stocking',
+                'color' => 'n/a',
+                'id' => 43,
+                'name' => 'Purchased Order',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            41 => 
+            array (
+                'classification' => 'Product Stocking',
+                'color' => 'n/a',
+                'id' => 44,
+                'name' => 'Deliveries',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            42 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 45,
+                'name' => 'Inventory Report',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            43 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 46,
+                'name' => 'Re-order Report',
+                'others' => 'n/a',
+                'type' => 'n/a',
+            ),
+            44 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 47,
+                'name' => 'Sales Report',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            45 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 48,
+                'name' => 'Delivery Report',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            46 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 49,
+                'name' => 'Stock Adjustment Report',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            47 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 50,
+                'name' => 'Customer Return Report',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            48 => 
+            array (
+                'classification' => 'Reports',
+                'color' => 'n/a',
+                'id' => 51,
+                'name' => 'Supplier Return Report',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            49 => 
+            array (
+                'classification' => 'Utility',
+                'color' => 'n/a',
+                'id' => 52,
+                'name' => 'User Management',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            50 => 
+            array (
+                'classification' => 'Utility',
+                'color' => 'n/a',
+                'id' => 53,
+                'name' => 'Backup and Restore',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            51 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 54,
+                'name' => 'Customers',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            52 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 55,
+                'name' => 'Pricing',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            53 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 56,
+                'name' => 'Suppliers',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            54 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 57,
+                'name' => 'Discount',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            55 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 58,
+                'name' => 'Category and Unit',
+                'others' => 'n/a',
+                'type' => 'Menu',
+            ),
+            56 => 
+            array (
+                'classification' => 'Maintenance',
+                'color' => 'n/a',
+                'id' => 59,
+                'name' => 'Terms & Conditions',
+                'others' => 'n/a',
+                'type' => 'Menu',
             ),
         ));
         

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('reorder')->default(0);
             $table->boolean('is_active')->default(1);
             $table->decimal('price',12,2);
+            $table->longText('description');
             $table->string('warranty')->nullable();
             $table->integer('percentage_id')->unsigned()->index();
             $table->foreign('percentage_id')->references('id')->on('pricings')->onDelete('cascade');
