@@ -99,7 +99,7 @@ class ApiController extends Controller
             // }
           
 
-            $data = Sale::create(array_merge($request->all(),['code' => $code, 'customer_id' => $request->customer_id,'managed_by' => $id]));
+            $data = Sale::create(array_merge($request->all(),['code' => $code,'managed_by' => $id]));
             if($data){
                 foreach($lists as $list){
                     $l = new SaleList;
