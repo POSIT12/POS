@@ -3839,7 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
       return '₱' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     print: function print() {
-      window.open(this.currentUrl + '/reports/' + this.date + '/reorders');
+      window.open(this.currentUrl + '/reports/' + this.date + '/orders');
     }
   }
 });
