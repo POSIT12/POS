@@ -73,6 +73,24 @@
                         <textarea v-model="product.description" class="form-control" maxlength="225" rows="2" placeholder="Description"></textarea>
                     </div>
                 </div>
+                <div class="col-md-4 mt-2">
+                   <div class="form-group">
+                        <label class="text-warning" style="margin-bottom: -10px; font-size: 11px;">Average Demand: <span v-if="form.errors" v-text="form.errors.reorder" class="haveerror"></span></label>
+                        <input type="text" class="form-control" v-model="product.demand">
+                    </div>
+                </div>
+                 <div class="col-md-4 mt-2">
+                   <div class="form-group">
+                        <label class="text-warning" style="margin-bottom: -10px; font-size: 11px;">Lead Time: <span v-if="form.errors" v-text="form.errors.reorder" class="haveerror"></span></label>
+                        <input type="text" class="form-control" v-model="product.lead">
+                    </div>
+                </div>
+                 <div class="col-md-4 mt-2">
+                   <div class="form-group">
+                        <label class="text-warning" style="margin-bottom: -10px; font-size: 11px;">Safety Stock: <span v-if="form.errors" v-text="form.errors.reorder" class="haveerror"></span></label>
+                        <input type="text" class="form-control" v-model="product.stock">
+                    </div>
+                </div>
                 <!-- <div class="col-md-3 mt-2">
                     <div class="form-group">
                         <label>Price: <span v-if="form.errors" v-text="form.errors.price" class="haveerror"></span></label>
@@ -131,7 +149,10 @@ export default {
                 warrantynumber: '',
                 warrantytype: null,
                 unit: this.units[12].id,
-                description: ''
+                description: '',
+                demand: '',
+                lead: '',
+                stock: ''
             },
             form: {},
             editable: false,
@@ -170,7 +191,10 @@ export default {
                 description: this.product.description,
                 warranty: (this.product.warrantynumber) ? this.product.warrantynumber+' '+this.product.warrantytype : '',
                 category_id: (this.product.category) ? this.product.category.id : '',
-                editable: this.editable
+                editable: this.editable,
+                demand: this.product.demand,
+                lead: this.product.lead,
+                stock: this.product.stock,
             })
 
             this.form.post('/products',{
@@ -191,6 +215,9 @@ export default {
                 pricing: '',
                 price: '',
                 size: '',
+                demand: '',
+                lead: '',
+                stock: '',
                 unit: this.units[12]
             };
             this.$emit('message',true);

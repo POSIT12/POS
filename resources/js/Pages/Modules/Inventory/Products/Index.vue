@@ -51,7 +51,7 @@
                             <td class="text-center">
                                 <h5 class="fs-12 mb-0">{{list.name}}</h5>
                             </td>
-                            <td class="text-center"> {{list.description}}</td>
+                            <td class="text-center"> {{list.Description}}</td>
                             <td class="text-center"> {{list.brand}}</td>
                              <td class="text-center"> {{list.size}} {{list.unit.name}}</td>
                             <td class="text-center"> {{list.category.name}}</td>

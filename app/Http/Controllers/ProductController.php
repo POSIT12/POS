@@ -38,6 +38,9 @@ class ProductController extends Controller
             'percentage_id' => 'required',
             'size' => 'required',
             'price' => 'required',
+            'demand' => 'required|integer|min:1',
+            'lead' => 'required|integer|min:1',
+            'stock' => 'required|integer|min:1'
             
         ]);
 
@@ -47,8 +50,20 @@ class ProductController extends Controller
                 $data->update($request->except('editable'));
                 return $data;
             }else{
+                $reorder = 0;
+                if($request->demand != null && $request->lead != null && $request->stock != null){
+                    $demand = $request->demand;
+                    $lead = $request->lead;
+                    $stock = $request->stock;
+
+                    $ss =$stock/100 * $demand;
+                    $ld = $demand*$lead;
+
+                    $reorder = $ld + $ss;
+                }
+
                 $code = 'PRDCT'.date('Y').date('m').date('d')."-".str_pad((Product::count()+1), 4, '0', STR_PAD_LEFT);  
-                $data = Product::create(array_merge($request->all(),['code' => $code]));
+                $data = Product::create(array_merge($request->all(),['code' => $code,'reorder' => $reorder]));
                 if($data){
                     $p = new ProductPrice;
                     $p->price = $request->price;
