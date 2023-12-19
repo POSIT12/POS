@@ -3839,7 +3839,7 @@ __webpack_require__.r(__webpack_exports__);
       return '₱' + val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     },
     print: function print() {
-      window.open(this.currentUrl + '/reports/' + this.date + '/orders');
+      window.open(this.currentUrl + '/reports/' + this.date + '/reorders');
     }
   }
 });
@@ -15722,7 +15722,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "cursor": "pointer"
         },
         onClick: _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.fetchMine();
+          return _ctx.fetct();
         }),
         "class": "input-group-text bg-primary border-primary text-white"
       }, _hoisted_9)])];

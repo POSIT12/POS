@@ -8,7 +8,7 @@
                         <b-col sm="auto">
                             <div class="input-group">
                                 <flat-pickr v-model="date" :config="config" class="form-control border-0 dash-filter-picker shadow"></flat-pickr>
-                                <div style="cursor: pointer;" @click="fetchMine()" class="input-group-text bg-primary border-primary text-white">
+                                <div style="cursor: pointer;" @click="fetct()" class="input-group-text bg-primary border-primary text-white">
                                     <i class="ri-calendar-2-line"></i>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ export default {
             return '₱'+val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         },
         print(){
-            window.open(this.currentUrl + '/reports/'+this.date+'/orders');
+            window.open(this.currentUrl + '/reports/'+this.date+'/reorders');
         }
     }
 }
