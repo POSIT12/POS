@@ -182,14 +182,14 @@ class ReportController extends Controller
         $monday =  date("Y-m-d", strtotime($monday));
         $sunday = date("Y-m-d", strtotime($sunday));        
 
-        $sales = SaleList::with('product')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
+        $sales = SaleList::with('product','package')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
         $orders = OrderList::with('product')->whereBetween('created_at', [$monday, $sunday])->where('status_id',8)->get();
         
         $sessions = [];
         if(count($sales) > 0){
             foreach($sales as $sale){
                 $sessions[] = [
-                    'product' => $sale['product']['name'],
+                    'product' => ($sale['product']) ? $sale['product']['name'] : $sale['package']['name'],
                     'type' => 'Sold',
                     'quantity' => $sale['quantity'],
                     'price'=> $sale['price'],
