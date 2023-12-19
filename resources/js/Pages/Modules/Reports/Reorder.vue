@@ -43,7 +43,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div v-else class="alert alert-warning" role="alert"><strong>No report found, </strong>for this range of date.</div>
+                    <div v-else class="alert alert-warning" role="alert"><strong>No report founds, </strong>for this range of date.</div>
                 </div>
             </div>
         </div>
