@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Artisan;
+use Illuminate\Support\Facades\Storage;
 
 class BackupController extends Controller
 {
@@ -11,7 +12,8 @@ class BackupController extends Controller
         $options = $request->options;
         switch($options){
             case 'lists':
-            //    return $this->lists($request);
+                $files = Storage::files('Laravel');
+                return $files;
             return '';
             break;
             default : 
@@ -31,6 +33,8 @@ class BackupController extends Controller
                 'type' => 'bxs-check-circle',
                 'color' => 'success'
             ]); 
+        }else{
+
         }
     }
 }

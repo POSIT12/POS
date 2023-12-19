@@ -25,8 +25,19 @@
         </b-col>
 
         <b-col xl="12">
-            <div class="table-responsive">
-                {{  lists  }}
+            <div class="table-responsive mt-1">
+                <table class="table table-bordered table-centered align-middle table-nowrap mb-0">
+                    <thead class="text-muted table-light">
+                        <tr>
+                            <th scope="col" >Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(list,index) in lists" v-bind:key="index">
+                            <td>{{list}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </b-col>
     </b-row>
