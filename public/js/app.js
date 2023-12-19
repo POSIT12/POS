@@ -10701,7 +10701,7 @@ var _hoisted_1 = {
 };
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "flex-grow-1 mb-n3"
-}, "Products Management", -1 /* HOISTED */);
+}, "Products Managements", -1 /* HOISTED */);
 var _hoisted_3 = {
   "class": "flex-shrink-0"
 };
