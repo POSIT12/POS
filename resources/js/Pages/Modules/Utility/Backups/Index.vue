@@ -40,7 +40,7 @@
                             <td>{{list.name}}</td>
                              <!-- <td>{{list.path}}</td> -->
                               <td>{{list.date}}</td>
-                            <td><b-button variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
+                            <td><b-button @click="downloadFile(list.name)" target="_blank" variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -93,6 +93,10 @@ export default {
             })
             .catch(err => console.log(err));
         },
+        downloadFile(filePath) {
+      // Trigger file download using the file path
+      window.open(this.currentUrl+'/download/'+filePath);
+    },
         openCreate(){
            this.$refs.view.show();
         },

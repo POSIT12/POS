@@ -5734,6 +5734,10 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
+    downloadFile: function downloadFile(filePath) {
+      // Trigger file download using the file path
+      window.open(this.currentUrl + '/download/' + filePath);
+    },
     openCreate: function openCreate() {
       this.$refs.view.show();
     },
@@ -19801,6 +19805,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
               key: index
             }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(list.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <td>{{list.path}}</td> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(list.date), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_b_button, {
+              onClick: function onClick($event) {
+                return $options.downloadFile(list.name);
+              },
+              target: "_blank",
               variant: "primary",
               title: "Download",
               size: "sm",
@@ -19809,8 +19817,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
                 return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Download")];
               }),
-              _: 1 /* STABLE */
-            })), [[_directive_b_tooltip, void 0, void 0, {
+              _: 2 /* DYNAMIC */
+            }, 1032 /* PROPS, DYNAMIC_SLOTS */, ["onClick"])), [[_directive_b_tooltip, void 0, void 0, {
               hover: true
             }]])])]);
           }), 128 /* KEYED_FRAGMENT */))])])])];

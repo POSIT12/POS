@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Artisan;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class BackupController extends Controller
 {
@@ -51,5 +52,28 @@ class BackupController extends Controller
         });
 
         return $fileDetails->toJson();
+    }
+
+    public function download($filename)
+    {
+        $filePath = '/app/Laravel/' . $filename;
+
+        return $this->streamFile($filePath);
+    }
+
+    private function streamFile($filePath)
+    {
+        return new StreamedResponse(function () use ($filePath) {
+            $stream = fopen(storage_path($filePath), 'rb');
+
+            while (!feof($stream)) {
+                echo fread($stream, 1024);
+            }
+
+            fclose($stream);
+        }, 200, [
+            'Content-Type' => mime_content_type(storage_path($filePath)),
+            'Content-Disposition' => 'attachment; filename="' . basename($filePath) . '"',
+        ]);
     }
 }
