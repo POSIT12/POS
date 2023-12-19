@@ -3,7 +3,7 @@
     <b-row>
         <b-col xl="12">
             <div class=" d-flex align-items-center">
-                <h3 class="flex-grow-1 mb-n3">Products Managements</h3>
+                <h3 class="flex-grow-1 mb-n3">Products Management</h3>
                 <div class="flex-shrink-0">
                     <div class="input-group mb-1">
                         <span class="input-group-text"> <i class="ri-search-line search-icon"></i></span>
