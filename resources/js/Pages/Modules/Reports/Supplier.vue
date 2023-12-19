@@ -34,7 +34,7 @@
                             </thead>
                             <tbody>
                                 <tr v-for="(list,index) in lists" v-bind:key="index">
-                                    <td class="text-center">{{list.salelist.product.name}}</td>
+                                    <td class="text-center">{{list.product.name}}</td>
                                     <td class="text-center">{{list.quantity}}</td>
                                     <td class="text-center">{{list.reason}}</td>
                                     <td class="text-center">{{formatMoney(list.total)}}</td>
@@ -71,7 +71,7 @@ export default {
     },
     methods: {
         fetch(page_url){
-            page_url = page_url || '/reports/customers';
+            page_url = page_url || '/reports/suppliers';
             axios.get(page_url,{
                 params : {
                     date : this.date,
@@ -90,7 +90,7 @@ export default {
             return '₱'+val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         },
         print(){
-            window.open(this.currentUrl + '/reports/'+this.date+'/customers');
+            window.open(this.currentUrl + '/reports/'+this.date+'/suppliers');
         }
     }
 }

@@ -162,10 +162,10 @@ class ReportController extends Controller
                     $monday =  date("Y-m-d", strtotime($monday));
                     $sunday = date("Y-m-d", strtotime($sunday));    
 
-                    $lists = SaleListReturn::with('salelist.product','status')->whereBetween('created_at', [$monday, $sunday])->get();
+                    $lists = SupplierListReturn::with('product','status')->whereBetween('created_at', [$monday, $sunday])->get();
                     return $lists;
                 }else{
-                    return inertia('Modules/Reports/Customer',['d' => $monday.' to '.$sunday]);
+                    return inertia('Modules/Reports/Supplier',['d' => $monday.' to '.$sunday]);
                 }
             break;
             default : 
@@ -380,12 +380,12 @@ class ReportController extends Controller
         $monday =  date("Y-m-d", strtotime($monday));
         $sunday = date("Y-m-d", strtotime($sunday));        
 
-        $lists = SupplierListReturn::with('salelist.product','status')->whereBetween('created_at', [$monday, $sunday])->get();
+        $lists = SupplierListReturn::with('product','status')->whereBetween('created_at', [$monday, $sunday])->get();
     
         if(count($lists) > 0){
             foreach($lists as $list){
                 $sessions[] = [
-                    'product' => $list['salelist']['product']['name'],
+                    'product' => $list['product']['name'],
                     'total' => $list['total'],
                     'reason'=> $list['reason'],
                     'quantity'=> $list['quantity'],

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SaleList;
 use App\Models\SaleListReturn;
+use App\Models\SupplierListReturn;
 use Illuminate\Http\Request;
 use App\Http\Resources\DefaultResource;
 
@@ -52,9 +53,21 @@ class SupplierReturnController extends Controller
             'reason' => 'sometimes|required',
         ]);
 
-        $data = SaleListReturn::where('id',$request->id)->first();
+        $data = SaleListReturn::with('salelist.product')->where('id',$request->id)->first();
         $data->reason_id = $request->reason_id;
-        $data->save();
+        if($data->save()){
+            $d = new SupplierListReturn;
+            $d->reason = $data->reason;
+            $d->quantity = $data->quantity;
+            $d->total = $data->total;
+            $d->reason_id = $data->reason_id;
+            $d->managed_by = \Auth::user()->id;
+            $d->from_inventory = 0;
+            $d->product_id = $data->salelist->product->id;
+            $d->save();
+            
+
+        }
 
         return back()->with([
             'message' => 'Refunded successfully. Thanks',
