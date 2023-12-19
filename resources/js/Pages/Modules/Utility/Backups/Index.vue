@@ -14,7 +14,7 @@
                         <input type="text" v-model="keyword" placeholder="Search Name" class="form-control" style="width: 50%;">
                         
                         <b-button @click="openCreate()" type="button" variant="primary">
-                            <i class="ri-add-circle-fill align-bottom me-1"></i> New Discount
+                            <i class="ri-add-circle-fill align-bottom me-1"></i> Make Backup
                         </b-button>
                     </div>
                 </div>
@@ -43,6 +43,7 @@ export default {
     props: ['dropdowns'],
     data() {
         return {
+             currentUrl: window.location.origin,
             title: "Discount Management",
             items: [{text: "View",href: "/"},{ text: "Dasboard",active: true}, ],
             keyword: '',
@@ -77,7 +78,11 @@ export default {
             .catch(err => console.log(err));
         },
         openCreate(){
-            this.$refs.create.show();
+            axios.get('/backups/create')
+            .then(response => {
+                // this.lists = response.data;
+            })
+            .catch(err => console.log(err));
         },
         edit(data){
             this.$refs.create.edit(data);

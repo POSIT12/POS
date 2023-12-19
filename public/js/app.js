@@ -5695,6 +5695,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['dropdowns'],
   data: function data() {
     return {
+      currentUrl: window.location.origin,
       title: "Discount Management",
       items: [{
         text: "View",
@@ -5736,7 +5737,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     openCreate: function openCreate() {
-      this.$refs.create.show();
+      axios.get('/backups/create').then(function (response) {
+        // this.lists = response.data;
+      })["catch"](function (err) {
+        return console.log(err);
+      });
     },
     edit: function edit(data) {
       this.$refs.create.edit(data);
@@ -19772,7 +19777,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             variant: "primary"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" New Discount ")];
+              return [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Make Backup ")];
             }),
             _: 1 /* STABLE */
           })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </b-card-body>\r\n            </b-card> "), _hoisted_7];
