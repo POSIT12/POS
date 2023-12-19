@@ -27,13 +27,13 @@ class ReportController extends Controller
                     $monday =  date("Y-m-d", strtotime($monday));
                     $sunday = date("Y-m-d", strtotime($sunday));    
 
-                    $sales = SaleList::with('product','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
+                    $sales = SaleList::with('product','package','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
                     
                     $lists = [];
                     if(count($sales) > 0){
                         foreach($sales as $sale){
                             $lists[] = [
-                                'product' => $sale['product']['name'],
+                                'product' => ($sale['product']) ? $sale['product']['name'] : $sale['package']['name'] ,
                                 'type' => 'Sold',
                                 'quantity' => $sale['quantity'],
                                 'price'=> $sale['price'],
@@ -230,14 +230,14 @@ class ReportController extends Controller
         $monday =  date("Y-m-d", strtotime($monday));
         $sunday = date("Y-m-d", strtotime($sunday));        
 
-        $sales = SaleList::with('product','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
+        $sales = SaleList::with('product','package','sale.customer','sale.user')->whereBetween('created_at', [$monday, $sunday])->where('status_id',27)->get();
         
         $sessions = [];
         if(count($sales) > 0){
             foreach($sales as $sale){
                 $sessions[] = [
                     'customer'=> $sale['sale']['customer']['name'],
-                    'product' => $sale['product']['name'],
+                    'product' => ($sale['product']) ? $sale['product']['name'] : $sale['package']['name'],
                     'type' => 'Sold',
                     'quantity' => $sale['quantity'],
                     'price'=> $sale['price'],
