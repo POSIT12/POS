@@ -31,7 +31,7 @@
                         <tr>
                             <th scope="col" >Name</th>
                             <!-- <th scope="col" >Path</th> -->
-                            <th scope="col" >Date</th>
+                            <th class="text-center">Date</th>
                             <th scope="col" ></th>
                         </tr>
                     </thead>
@@ -39,8 +39,8 @@
                         <tr v-for="(list,index) in lists" v-bind:key="index">
                             <td>{{list.name}}</td>
                              <!-- <td>{{list.path}}</td> -->
-                              <td>{{list.date}}</td>
-                            <td><b-button @click="downloadFile(list.name)" target="_blank" variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
+                              <td class="text-center">{{list.date}}</td>
+                            <td class="text-center"><b-button @click="downloadFile(list.name)" target="_blank" variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
                         </tr>
                     </tbody>
                 </table>
