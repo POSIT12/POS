@@ -408,4 +408,43 @@ class ReportController extends Controller
         $pdf = \PDF::loadView('print.supplier',$array)->setPaper('a4', 'landscape');
         return $pdf->download('SupplierReport.pdf');
     }
+
+    public function reorders($date,Request $request){
+       
+        $d = (explode("to", $date));
+        $monday = str_replace(' ','',$d[0]);
+        $sunday = str_replace(' ','',$d[1]);
+        $monday =  date("Y-m-d", strtotime($monday));
+        $sunday = date("Y-m-d", strtotime($sunday));        
+
+        $lists = Product::whereColumn('stock', '<', 'reorder')
+                    ->get();
+    
+        if(count($lists) > 0){
+            foreach($lists as $list){
+                $sessions[] = [
+                    'product' => $list['name'],
+                    'stock' => $list['stock'],
+                    'reorder'=> $list['reorder'],
+                    'code'=> $list['code'],
+                    'date' => $list['created_at']
+                ];
+            }
+        }else{
+            $sessions = [];
+        }
+
+        $monday2 =  date("F d, y", strtotime("this week monday"));
+        $sunday2 = date("F d, y", strtotime("this week sunday"));      
+
+        $array = [
+            'sessions' => $sessions,
+            'week' => $monday2.' to '.$sunday2
+        ];
+
+        $pdf = \PDF::loadView('print.reorder',$array)->setPaper('a4', 'landscape');
+        return $pdf->download('ReorderReport.pdf');
+    }
+
+    
 }
