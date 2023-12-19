@@ -423,7 +423,7 @@ class ReportController extends Controller
         if(count($lists) > 0){
             foreach($lists as $list){
                 $sessions[] = [
-                    'product' => $list['name'],
+                    'name' => $list['name'],
                     'stock' => $list['stock'],
                     'reorder'=> $list['reorder'],
                     'code'=> $list['code'],

@@ -94,11 +94,10 @@ border-top: none !important;
         <table style="width:100%; font-size: 10px; padding: 20px; font-family:Arial, Helvetica, sans-serif">
             <thead>
                 <tr style="background-color: #a7dceb;">
-                    <th>Supplier</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Stock</th>
+                    <th>Reorder</th>
                     <th>Date</th>
                 </tr>
             </thead>
