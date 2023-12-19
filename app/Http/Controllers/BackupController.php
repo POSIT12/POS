@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Artisan;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ class BackupController extends Controller
         $options = $request->options;
         switch($options){
             case 'lists':
-               $this->lists();
+               return $this->lists();
             return '';
             break;
             default : 
@@ -38,16 +39,17 @@ class BackupController extends Controller
     }
 
     public function lists(){
-        $perPage = 10;
         $files = Storage::files('Laravel');
 
         $fileDetails = collect($files)->map(function ($file) {
             return [
                 'name' => basename($file),
                 'path' => $file,
-                'url' => route('file.show', ['filename' => basename($file)]),
+                // 'url' => route('file.show', ['filename' => basename($file)]),
                 'date' => Carbon::createFromTimestamp(Storage::lastModified($file))->toDateTimeString(),
             ];
         });
+
+        return $fileDetails->toJson();
     }
 }

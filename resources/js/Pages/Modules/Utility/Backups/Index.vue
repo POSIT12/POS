@@ -30,12 +30,16 @@
                     <thead class="text-muted table-light">
                         <tr>
                             <th scope="col" >Name</th>
+                            <th scope="col" >Path</th>
+                            <th scope="col" >Date</th>
                             <th scope="col" ></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(list,index) in lists" v-bind:key="index">
-                            <td>{{list}}</td>
+                            <td>{{list.name}}</td>
+                             <td>{{list.path}}</td>
+                              <td>{{list.date}}</td>
                             <td><b-button variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
                         </tr>
                     </tbody>
@@ -84,6 +88,7 @@ export default {
                 }
             })
             .then(response => {
+                console.log(response);
                 this.lists = response.data;
             })
             .catch(err => console.log(err));
