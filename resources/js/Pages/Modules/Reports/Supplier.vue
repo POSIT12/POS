@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header border-0 align-items-center d-flex">
-                    <h5 class="card-title mb-0 flex-grow-1">Customer Return Report</h5>
+                    <h5 class="card-title mb-0 flex-grow-1">Supplier Return Report</h5>
                     <div class="hstack gap-1">
                         <b-col sm="auto">
                             <div class="input-group">

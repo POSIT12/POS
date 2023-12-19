@@ -15951,7 +15951,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
   "class": "card-title mb-0 flex-grow-1"
-}, "Customer Return Report", -1 /* HOISTED */);
+}, "Supplier Return Report", -1 /* HOISTED */);
 var _hoisted_6 = {
   "class": "hstack gap-1"
 };
