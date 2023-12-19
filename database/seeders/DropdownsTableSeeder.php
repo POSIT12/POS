@@ -332,7 +332,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 37,
                 'name' => 'Home',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             35 => 
             array (
@@ -341,7 +341,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 38,
                 'name' => 'Cashiering',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             36 => 
             array (
@@ -350,7 +350,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 39,
                 'name' => 'Product Management',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             37 => 
             array (
@@ -359,7 +359,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 40,
                 'name' => 'Package Management',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             38 => 
             array (
@@ -368,7 +368,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 41,
                 'name' => 'Customer Return',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             39 => 
             array (
@@ -377,7 +377,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 42,
                 'name' => 'Supplier Return',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             40 => 
             array (
@@ -386,7 +386,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 43,
                 'name' => 'Purchased Order',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             41 => 
             array (
@@ -395,7 +395,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 44,
                 'name' => 'Deliveries',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             42 => 
             array (
@@ -404,7 +404,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 45,
                 'name' => 'Inventory Report',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             43 => 
             array (
@@ -413,7 +413,7 @@ class DropdownsTableSeeder extends Seeder
                 'id' => 46,
                 'name' => 'Re-order Report',
                 'others' => 'n/a',
-                'type' => 'n/a',
+                'type' => 'Menu',
             ),
             44 => 
             array (
