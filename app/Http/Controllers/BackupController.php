@@ -12,8 +12,7 @@ class BackupController extends Controller
         $options = $request->options;
         switch($options){
             case 'lists':
-                $files = Storage::files('Laravel');
-                return $files;
+               $this->lists();
             return '';
             break;
             default : 
@@ -36,5 +35,19 @@ class BackupController extends Controller
         }else{
 
         }
+    }
+
+    public function lists(){
+        $perPage = 10;
+        $files = Storage::files('Laravel');
+
+        $fileDetails = collect($files)->map(function ($file) {
+            return [
+                'name' => basename($file),
+                'path' => $file,
+                'url' => route('file.show', ['filename' => basename($file)]),
+                'date' => Carbon::createFromTimestamp(Storage::lastModified($file))->toDateTimeString(),
+            ];
+        });
     }
 }

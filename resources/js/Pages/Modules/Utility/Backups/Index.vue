@@ -30,11 +30,13 @@
                     <thead class="text-muted table-light">
                         <tr>
                             <th scope="col" >Name</th>
+                            <th scope="col" ></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(list,index) in lists" v-bind:key="index">
                             <td>{{list}}</td>
+                            <td><b-button variant="primary" v-b-tooltip.hover title="Download" size="sm" class="edit-list">Download</b-button></td>
                         </tr>
                     </tbody>
                 </table>
