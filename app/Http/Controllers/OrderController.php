@@ -73,7 +73,7 @@ class OrderController extends Controller
                             $product = Product::where('id',$product_id)->first();
                             if($order_list != null){
                                 $endDate = now();
-                                $startDate = now()->modify('-30 days');
+                                $startDate = $givenDateTime;
 
                                 $sales = SaleList::where('created_at', '>=', $startDate)
                                 ->where('created_at', '<=', $endDate)
@@ -89,7 +89,26 @@ class OrderController extends Controller
 
                                 $total = $total->sum('quantity');
 
-                                $reorder = ($average_sales*$days)+$total;
+                                $lead = $days;
+                                $safety = $product->safety;
+                                $demand = $total;
+
+                                $ss =$safety/100 * $demand;
+                                $ld = $demand*$lead;
+            
+                                $reorder = $ld + $ss;
+                                
+                                $product->reorder = $reorder;
+                                $product->save();
+                            }else{
+                                $lead = $product->lead;
+                                $safety = $product->safety;
+                                $demand = $product->demand;
+
+                                $ss =$safety/100 * $demand;
+                                $ld = $demand*$lead;
+            
+                                $reorder = $ld + $ss;
                                 $product->reorder = $reorder;
                                 $product->save();
                             }
