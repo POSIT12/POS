@@ -23,6 +23,14 @@ class BackupController extends Controller
     public function create()
     {
         $data = Artisan::call('backup:run');
-        return $data;
+        
+        if($data == 0){
+            return back()->with([
+                'message' => 'Backup was successfully. Thanks',
+                'data' => '',
+                'type' => 'bxs-check-circle',
+                'color' => 'success'
+            ]); 
+        }
     }
 }

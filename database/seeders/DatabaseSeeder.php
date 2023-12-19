@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'administrator',
             'email' => 'admin@genpos8.com',
             'name' => 'John Doe',
-            'password' => bcrypt('123456789'),
+            'password' => bcrypt('!@#$%^&*('),
             'role_id' => 1,
             'avatar' => 'administrator.png',
             'is_active' => 1,

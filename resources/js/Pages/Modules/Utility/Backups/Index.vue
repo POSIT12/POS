@@ -30,16 +30,14 @@
             </div>
         </b-col>
     </b-row>
-    <Create :dropdowns="dropdowns" @message="fetch()" ref="create"/>
-    <Update ref="update" @message="fetch()"/>
+   <View ref="view"/>
 </template>
 <script>
-import Update from './Update.vue';
-import Create from './Create.vue';
+import View from './View.vue';
 import PageHeader from "@/Shared/Components/PageHeader.vue";
 import Pagination from "@/Shared/Components/Pagination.vue";
 export default {
-    components: { PageHeader, Pagination, Create, Update },
+    components: { PageHeader, Pagination,View },
     props: ['dropdowns'],
     data() {
         return {
@@ -78,11 +76,7 @@ export default {
             .catch(err => console.log(err));
         },
         openCreate(){
-            axios.get('/backups/create')
-            .then(response => {
-                // this.lists = response.data;
-            })
-            .catch(err => console.log(err));
+           this.$refs.view.show();
         },
         edit(data){
             this.$refs.create.edit(data);
