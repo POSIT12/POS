@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('brand')->nullable();
             $table->integer('stock')->default(0);
             $table->integer('reorder')->default(0);
+            $table->integer('lead')->default(0);
+            $table->integer('safety')->default(0);
+            $table->integer('demand')->default(0);
             $table->boolean('is_active')->default(1);
             $table->decimal('price',12,2);
             $table->longText('description');

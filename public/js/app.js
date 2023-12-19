@@ -1452,7 +1452,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         editable: this.editable,
         demand: this.product.demand,
         lead: this.product.lead,
-        stock: this.product.stock
+        safety: this.product.safety
       });
       this.form.post('/products', {
         preserveScroll: true,
@@ -1462,8 +1462,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       });
     },
     hide: function hide() {
-      var _this$product;
-      this.product = (_this$product = {
+      this.product = {
         id: '',
         name: '',
         brand: '',
@@ -1474,8 +1473,10 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         price: '',
         size: '',
         demand: '',
-        lead: ''
-      }, _defineProperty(_this$product, "stock", ''), _defineProperty(_this$product, "unit", this.units[12]), _this$product);
+        lead: '',
+        safety: '',
+        unit: this.units[12]
+      };
       this.$emit('message', true);
       this.showModal = false;
     },
@@ -10752,9 +10753,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             type: "text",
             "class": "form-control",
             "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-              return $data.product.stock = $event;
+              return $data.product.safety = $event;
             })
-          }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.stock]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-md-3 mt-2\">\r\n                    <div class=\"form-group\">\r\n                        <label>Price: <span v-if=\"form.errors\" v-text=\"form.errors.price\" class=\"haveerror\"></span></label>\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"product.price\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-3\"  style=\"margin-top: -2px;\">\r\n                    <label>Pricing: <span v-if=\"form.errors\" v-text=\"form.errors.pricing_id\" class=\"haveerror\"></span></label>\r\n                    <multiselect v-model=\"product.pricing\" id=\"ajax\" label=\"name\" track-by=\"id\"\r\n                        placeholder=\"Select\" open-direction=\"bottom\" :options=\"pricings\"\r\n                        :allow-empty=\"false\"\r\n                        :show-labels=\"false\">\r\n                    </multiselect> \r\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-md-3 mt-2\">\r\n                    <div class=\"form-group\">\r\n                        <label>Size: <span class=\"fs-11 text-muted\">(optional)</span> <span v-if=\"form.errors\" v-text=\"form.errors.name\" class=\"haveerror\"></span></label>\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"product.size\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-3\" style=\"margin-top: -2px;\">\r\n                    <label>Unit: <span v-if=\"form.errors\" v-text=\"form.errors.unit_id\" class=\"haveerror\"></span></label>\r\n                    <multiselect v-model=\"product.unit\" id=\"ajax\" label=\"name\" track-by=\"id\"\r\n                        placeholder=\"Select\" open-direction=\"bottom\" :options=\"units\"\r\n                        :allow-empty=\"false\"\r\n                        :show-labels=\"false\">\r\n                    </multiselect> \r\n                </div> ")])];
+          }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.safety]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-md-3 mt-2\">\r\n                    <div class=\"form-group\">\r\n                        <label>Price: <span v-if=\"form.errors\" v-text=\"form.errors.price\" class=\"haveerror\"></span></label>\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"product.price\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-3\"  style=\"margin-top: -2px;\">\r\n                    <label>Pricing: <span v-if=\"form.errors\" v-text=\"form.errors.pricing_id\" class=\"haveerror\"></span></label>\r\n                    <multiselect v-model=\"product.pricing\" id=\"ajax\" label=\"name\" track-by=\"id\"\r\n                        placeholder=\"Select\" open-direction=\"bottom\" :options=\"pricings\"\r\n                        :allow-empty=\"false\"\r\n                        :show-labels=\"false\">\r\n                    </multiselect> \r\n                </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"col-md-3 mt-2\">\r\n                    <div class=\"form-group\">\r\n                        <label>Size: <span class=\"fs-11 text-muted\">(optional)</span> <span v-if=\"form.errors\" v-text=\"form.errors.name\" class=\"haveerror\"></span></label>\r\n                        <input type=\"text\" class=\"form-control\" v-model=\"product.size\">\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-3\" style=\"margin-top: -2px;\">\r\n                    <label>Unit: <span v-if=\"form.errors\" v-text=\"form.errors.unit_id\" class=\"haveerror\"></span></label>\r\n                    <multiselect v-model=\"product.unit\" id=\"ajax\" label=\"name\" track-by=\"id\"\r\n                        placeholder=\"Select\" open-direction=\"bottom\" :options=\"units\"\r\n                        :allow-empty=\"false\"\r\n                        :show-labels=\"false\">\r\n                    </multiselect> \r\n                </div> ")])];
         }),
         _: 1 /* STABLE */
       })];

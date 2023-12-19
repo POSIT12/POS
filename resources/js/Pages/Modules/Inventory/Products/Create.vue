@@ -88,7 +88,7 @@
                  <div class="col-md-4 mt-2">
                    <div class="form-group">
                         <label class="text-warning" style="margin-bottom: -10px; font-size: 11px;">Safety Stock: <span v-if="form.errors" v-text="form.errors.reorder" class="haveerror"></span></label>
-                        <input type="text" class="form-control" v-model="product.stock">
+                        <input type="text" class="form-control" v-model="product.safety">
                     </div>
                 </div>
                 <!-- <div class="col-md-3 mt-2">
@@ -194,7 +194,7 @@ export default {
                 editable: this.editable,
                 demand: this.product.demand,
                 lead: this.product.lead,
-                stock: this.product.stock,
+                safety: this.product.safety,
             })
 
             this.form.post('/products',{
@@ -217,7 +217,7 @@ export default {
                 size: '',
                 demand: '',
                 lead: '',
-                stock: '',
+                safety: '',
                 unit: this.units[12]
             };
             this.$emit('message',true);

@@ -40,7 +40,7 @@ class ProductController extends Controller
             'price' => 'required',
             'demand' => 'required|integer|min:1',
             'lead' => 'required|integer|min:1',
-            'stock' => 'required|integer|min:1'
+            'safety' => 'required|integer|min:1'
             
         ]);
 
@@ -51,12 +51,12 @@ class ProductController extends Controller
                 return $data;
             }else{
                 $reorder = 0;
-                if($request->demand != null && $request->lead != null && $request->stock != null){
+                if($request->demand != null && $request->lead != null && $request->safety != null){
                     $demand = $request->demand;
                     $lead = $request->lead;
-                    $stock = $request->stock;
+                    $safety = $request->safety;
 
-                    $ss =$stock/100 * $demand;
+                    $ss =$safety/100 * $demand;
                     $ld = $demand*$lead;
 
                     $reorder = $ld + $ss;
