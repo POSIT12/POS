@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
     
     public function scopeVerify(){
-        $mail = MailUser::dispatch($this->id)->delay(now()->addSeconds(10));
-        return $mail;
+        /*$mail = MailUser::dispatch($this->id)->delay(now()->addSeconds(10));
+        return $mail;*/
     }
 }
